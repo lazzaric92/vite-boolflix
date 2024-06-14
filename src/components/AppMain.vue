@@ -25,8 +25,31 @@ export default{
             })
             .catch(function (error) {
                 console.log(error);
-            });  
+            });
+        },
+        getTVSeriesList: function(title){
+            axios.get('https://api.themoviedb.org/3/search/tv', {
+                params: {
+                api_key: "861729733fec3d9d72d05bb5c85381e2",
+                query: title,
+                language: "it-IT"
+                }
+            })
+            .then((response) => {
+                this.store.tvSeriesList = response.data.results;
+                console.log(this.store.tvSeriesList);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        },
+        getResultsList: function(){
+            this.store.resultsList = [...this.store.moviesList, ...this.store.tvSeriesList];
+            console.log(this.store.resultsList);
         }
+    },
+    created(){
+        this.getResultsList();
     }
 }
 </script>
@@ -42,23 +65,23 @@ export default{
                     </div>
                 </div>
                 <div class="col-2">
-                    <button class="btn btn-primary" @click="this.getMoviesList(searchedString)">CLICK ME</button>
+                    <button class="btn btn-primary" @click="this.getMoviesList(searchedString), this.getTVSeriesList(searchedString)">CLICK ME</button>
                 </div>
             </div>
         </div>
 
         <div class="container">
             <div class="row">
-                <div class="col-3" v-for="(movie, id) in this.store.moviesList" :key="movie.id">
+                <div class="col-3" v-for="(result, id) in this.store.resultsList" :key="result.id">
                     <article class="card mb-3">
                         <!-- <img src="..." class="card-img-top" alt="..."> -->
                         <div class="card-body">
-                            <h5 class="card-title">{{ movie.title }}</h5>
-                            <h6 class="card-subtitle mb-2 text-body-secondary">{{ movie.original_title }}</h6>
-                            <p class="card-text fs-6">{{ movie.original_language }}</p>
+                            <h5 class="card-title">{{ result.title }} {{ result.name }}</h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">{{ result.original_title }} {{ result.original_name }}</h6>
+                            <p class="card-text fs-6">{{ result.original_language }}</p>
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">{{ movie.vote_average }}</li>
+                            <li class="list-group-item">{{ result.vote_average }}</li>
                         </ul>
                     </article>
                 </div>
