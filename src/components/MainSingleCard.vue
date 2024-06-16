@@ -1,10 +1,24 @@
 <script>
 import { store } from "../store.js";
 
+
 export default{
     data(){
         return {
             store,
+            voteArray: [],
+        }
+    },
+    methods: {
+        adjustVote: function(vote){
+            let newVote = Math.floor(vote / 2);
+            if(newVote !== 0 && newVote !== 5){
+                newVote += 1;
+            }
+
+            this.voteArray = [0, 0, 0, 0, 0];
+            this.voteArray.fill(1, 0, newVote);
+            return this.voteArray;
         }
     },
     props: {
@@ -27,12 +41,14 @@ export default{
                 <h5 class="card-title">{{ singleCard.title }} {{ singleCard.name }}</h5>
                 <h6 class="card-subtitle mb-2 text-body-secondary">{{ singleCard.original_title }} {{ singleCard.original_name }}</h6>
                 <p class="lang-icon mb-0" :class="`lang-icon-${singleCard.original_language}`" </p>
-
-
-                <!-- <p class="card-text fs-6">{{ singleCard.original_language }}</p> -->
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">{{ singleCard.vote_average }}</li>
+                <li class="list-group-item">
+                    <template v-for="(point, index) in adjustVote(singleCard.vote_average)" :key="point.index">
+                        <font-awesome-icon v-if="(point === 0)" icon="fa-regular fa-star" size="xs" />
+                        <font-awesome-icon v-else icon="fa-solid fa-star" size="xs" />
+                    </template>
+                </li>
             </ul>
         </div>
     </article>
@@ -47,5 +63,9 @@ export default{
 
 .lang-icon {
     background-image: url(../../node_modules/@textabledev/langs-flags-list/lang-flags.png);
+}
+
+.fa-star{
+    color: orange;
 }
 </style>
