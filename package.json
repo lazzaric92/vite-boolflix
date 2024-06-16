@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@textabledev/langs-flags-list": "^1.0.0",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "vue": "^3.4.21"
