@@ -1,74 +1,65 @@
 <script>
 import axios from 'axios';
 import { store } from "../store.js";
+import MainSearch from './MainSearch.vue'
 
 export default{
     data(){
         return {
             message: 'Main',
             store,
-            searchedString: '',
         }
     },
     methods: {
-        getMoviesList: function(title){
+        getMoviesResults: function(){
             axios.get('https://api.themoviedb.org/3/search/movie', {
                 params: {
                 api_key: "861729733fec3d9d72d05bb5c85381e2",
-                query: title,
+                query: this.store.searchedString,
                 language: "it-IT"
                 }
             })
             .then((response) => {
                 this.store.moviesList = response.data.results;
                 console.log(this.store.moviesList);
+                this.store.resultsList = this.store.resultsList.concat(this.store.moviesList);
             })
             .catch(function (error) {
                 console.log(error);
             });
         },
-        getTVSeriesList: function(title){
+        getTVSeriesResults: function(){
             axios.get('https://api.themoviedb.org/3/search/tv', {
                 params: {
                 api_key: "861729733fec3d9d72d05bb5c85381e2",
-                query: title,
+                query: this.store.searchedString,
                 language: "it-IT"
                 }
             })
             .then((response) => {
                 this.store.tvSeriesList = response.data.results;
                 console.log(this.store.tvSeriesList);
+                this.store.resultsList = this.store.resultsList.concat(this.store.tvSeriesList);
             })
             .catch(function (error) {
                 console.log(error);
-            });
+            }); 
         },
-        getResultsList: function(){
-            this.store.resultsList = [...this.store.moviesList, ...this.store.tvSeriesList];
-            console.log(this.store.resultsList);
+        getSearchResults: function(){
+            this.store.resultsList = [];
+            this.getMoviesResults();
+            this.getTVSeriesResults();
         }
     },
-    created(){
-        this.getResultsList();
+    components: {
+        MainSearch
     }
 }
 </script>
 
 <template>
     <main class="p-4">
-        <div class="container mb-5">
-            <div class="row align-items-center">
-                <div class="col-10">
-                    <div class="form-floating">
-                        <input type="search" class="form-control" id="search-input" placeholder="Search" v-model="searchedString">
-                        <label for="search-input">Search</label>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <button class="btn btn-primary" @click="this.getMoviesList(searchedString), this.getTVSeriesList(searchedString)">CLICK ME</button>
-                </div>
-            </div>
-        </div>
+        <MainSearch @search="getSearchResults"/>
 
         <div class="container">
             <div class="row">
