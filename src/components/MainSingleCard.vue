@@ -20,7 +20,7 @@ export default{
     <article class="col-3 mb-3">
         <div class="card h-100">
             <div class="card-image">
-                <p v-if="singleCard.poster_path == null"> {{ singleCard.title }} {{ singleCard.name }} has no poster</p>
+                <img v-if="singleCard.poster_path == null" class="card-img-top h-100" src="../assets/img/mockup-movie-poster.jpeg" :alt="`${singleCard.title}${singleCard.name} has no poster`"></img>
                 <img v-else :src="`https://image.tmdb.org/t/p/w342/${singleCard.poster_path}`" class="card-img-top h-100" :alt="`${singleCard.title}${singleCard.name} Poster`">
             </div>
             <div class="card-body">
@@ -42,12 +42,7 @@ export default{
 @use '../../node_modules/@textabledev/langs-flags-list/lang-flags.css';
 
 .card-image {
-    height: 389.5px;
-
-    p{
-        text-align: center;
-        margin-top: 1rem;
-    }
+    height: 375px;
 }
 
 .lang-icon {
