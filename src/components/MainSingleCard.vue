@@ -11,10 +11,12 @@ export default{
     },
     methods: {
         adjustVote: function(vote){
-            let newVote = Math.floor(vote / 2);
-            if(newVote !== 0 && newVote !== 5){
-                newVote += 1;
+            let newVote = vote / 2;
+            if(!Number.isInteger(newVote) && newVote !== 5){
+                newVote = Math.floor(newVote) + 1;
             }
+
+            console.log(vote, newVote);
 
             this.voteArray = [0, 0, 0, 0, 0];
             this.voteArray.fill(1, 0, newVote);
