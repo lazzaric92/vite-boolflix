@@ -6,8 +6,9 @@ import { faStar as fasFaStar } from "../node_modules/@fortawesome/free-solid-svg
 import { faStar as farFaStar } from "../node_modules/@fortawesome/free-regular-svg-icons";
 import { faMagnifyingGlass } from "../node_modules/@fortawesome/free-solid-svg-icons";
 import { faCircleUser } from "../node_modules/@fortawesome/free-solid-svg-icons";
+import { faXmark } from "../node_modules/@fortawesome/free-solid-svg-icons";
 
-library.add(fasFaStar, farFaStar, faMagnifyingGlass, faCircleUser);
+library.add(fasFaStar, farFaStar, faMagnifyingGlass, faCircleUser, faXmark);
 
 createApp(App)
 .component('font-awesome-icon', FontAwesomeIcon)

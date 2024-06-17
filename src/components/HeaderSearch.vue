@@ -46,9 +46,14 @@ export default{
             }); 
         },
         getSearchResults: function(){
-            this.store.resultsList = [];
-            this.getMoviesList();
-            this.getTVSeriesList();
+            if(this.store.searchedString !== ""){
+                this.store.resultsList = [];
+                this.getMoviesList();
+                this.getTVSeriesList();
+            }
+        },
+        clearSearchInput: function(){
+            this.store.searchedString = "";
         }
     },
 }
@@ -58,11 +63,14 @@ export default{
     <div class="container">
             <div class="row align-items-center">
                 <div class="col-10">
-                    <input type="search" class="form-control" id="search-input" placeholder="Search"  v-model="this.store.searchedString" @keyup.enter="getSearchResults()">
+                    <div class="d-flex align-items-center border rounded">
+                        <input type="search" class="form-control border-0" id="search-input" placeholder="Search"  v-model="this.store.searchedString" @keyup.enter="getSearchResults()">
+                        <font-awesome-icon icon="fa-solid fa-xmark me-2" size="1x" @click="clearSearchInput()"/>
+                    </div>
                 </div>
                 <div class="col-2">
                     <button class="btn btn-outline-secondary" @click="getSearchResults()">
-                        <font-awesome-icon icon="fa-solid fa-magnifying-glass" size="s" />
+                        <font-awesome-icon icon="fa-solid fa-magnifying-glass" size="1x"/>
                     </button>
                 </div>
             </div>
@@ -70,5 +78,21 @@ export default{
 </template>
 
 <style scoped lang="scss">
+    div.col-10 div{
+        background-color: #212529;
 
+        &:hover .fa-xmark {
+            color: #9ea1a6;
+            cursor: pointer;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+        }
+
+
+        #search-input {
+            width: 95%;
+        }
+    }
 </style>
