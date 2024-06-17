@@ -16,8 +16,6 @@ export default{
                 newVote = Math.floor(newVote) + 1;
             }
 
-            console.log(vote, newVote);
-
             this.voteArray = [0, 0, 0, 0, 0];
             this.voteArray.fill(1, 0, newVote);
             return this.voteArray;
