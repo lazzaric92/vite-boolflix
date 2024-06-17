@@ -18,8 +18,12 @@ export default{
 </script>
 
 <template>
-    <main class="p-4">
-        <MainCardsList />
+    <main class="py-4">
+        <div class="container-fluid">
+            <div class="row">
+                <MainCardsList class="col-10 mx-auto" />
+            </div>
+        </div>
     </main>
 </template>
 
