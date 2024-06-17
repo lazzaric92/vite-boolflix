@@ -29,5 +29,6 @@ export default{
 
     main {
         margin-top: 60px;
+        overflow-y: auto;
     }
 </style>

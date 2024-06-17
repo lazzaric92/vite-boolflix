@@ -58,7 +58,7 @@ export default{
     <div class="container">
             <div class="row align-items-center">
                 <div class="col-10">
-                    <input type="search" class="form-control" id="search-input" placeholder="Search"  v-model="this.store.searchedString">
+                    <input type="search" class="form-control" id="search-input" placeholder="Search"  v-model="this.store.searchedString" @keyup.enter="getSearchResults()">
                 </div>
                 <div class="col-2">
                     <button class="btn btn-outline-secondary" @click="getSearchResults()">

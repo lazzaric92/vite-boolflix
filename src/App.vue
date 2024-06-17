@@ -1,4 +1,5 @@
 <script >
+import "@fontsource/noto-sans-jp";
 import AppMain from './components/AppMain.vue';
 import AppHeader from './components/AppHeader.vue';
 
@@ -16,8 +17,10 @@ export default{
 </script>
 
 <template>
-  <AppHeader />
-  <AppMain />
+  <div class="my_bigger-container">
+    <AppHeader />
+    <AppMain />
+  </div>
 </template>
 
 <style lang="scss">
