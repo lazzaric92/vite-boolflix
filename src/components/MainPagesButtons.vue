@@ -53,20 +53,53 @@ export default{
             }
         },
         nextPage: function(){
-            if(this.store.currentPage < this.store.totalPages - 1){
+            let pages;
+            switch (this.store.radioValue){
+                case 'movies':
+                    pages = this.store.moviesListPages;
+                    break;
+                case 'series':
+                    pages = this.store.tvSeriesListPages;
+                    break;
+                case 'all':
+                    pages = this.store.totalPages -1;
+                    break;
+                default:
+                    pages = this.store.totalPages;
+            }
+
+            if(this.store.currentPage < pages){
                 this.store.currentPage++;
                 this.updateSearchResults();
             } else {
-                this.store.currentPage = this.store.totalPages - 1
+                this.store.currentPage = pages;
+                this.updateSearchResults();
             }
+            console.log(this.store.currentPage, pages);
         },
         prevPage: function(){
-            if(this.store.currentPage > 1 && this.store.currentPage < this.store.totalPages){
+            let pages;
+            switch (this.store.radioValue){
+                case 'movies':
+                    pages = this.store.moviesListPages;
+                    break;
+                case 'series':
+                    pages = this.store.tvSeriesListPages;
+                    break;
+                case 'all':
+                    pages = this.store.totalPages -1;
+                    break;
+                default:
+                    pages = this.store.totalPages;
+            }
+            if(this.store.currentPage > 1 && this.store.currentPage <= pages){
                 this.store.currentPage--;
                 this.updateSearchResults();
             } else {
                 this.store.currentPage = 1
+                this.updateSearchResults();
             }
+            console.log(this.store.currentPage, pages);
         }
     }
 }

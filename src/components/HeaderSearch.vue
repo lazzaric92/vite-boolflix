@@ -21,12 +21,12 @@ export default{
             .then((response) => {
                 // lista film
                 this.store.moviesList = response.data.results;
-                console.log(this.store.moviesList);
+                // console.log(this.store.moviesList);
                 this.store.resultsList = [...this.store.resultsList, ...this.store.moviesList];
                 // pagine
                 this.store.moviesListPages = response.data.total_pages;
                 this.store.totalPages = this.store.totalPages + this.store.moviesListPages;
-                console.log(this.store.moviesListPages);
+                // console.log(this.store.moviesListPages);
             })
             .catch(function (error) {
                 console.log(error);
@@ -44,13 +44,13 @@ export default{
             .then((response) => {
                 // serie tv
                 this.store.tvSeriesList = response.data.results;
-                console.log(this.store.tvSeriesList);
+                // console.log(this.store.tvSeriesList);
                 this.store.resultsList = [...this.store.resultsList, ...this.store.tvSeriesList];
                 // pagine
                 this.store.tvSeriesListPages = response.data.total_pages;
                 this.store.totalPages = this.store.totalPages + this.store.tvSeriesListPages;
-                console.log(this.store.tvSeriesListPages);
-                console.log(this.store.totalPages);
+                // console.log(this.store.tvSeriesListPages);
+                // console.log(this.store.totalPages);
             })
             .catch(function (error) {
                 console.log(error);
