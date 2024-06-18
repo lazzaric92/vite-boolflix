@@ -15,7 +15,7 @@ export default{
                 api_key: "861729733fec3d9d72d05bb5c85381e2",
                 query: this.store.searchedString,
                 language: "it-IT",
-                page: this.store.currentPage
+                page: 1
                 }
             })
             .then((response) => {
@@ -38,7 +38,7 @@ export default{
                 api_key: "861729733fec3d9d72d05bb5c85381e2",
                 query: this.store.searchedString,
                 language: "it-IT",
-                page: this.store.currentPage
+                page: 1
                 }
             })
             .then((response) => {
@@ -59,6 +59,7 @@ export default{
         getSearchResults: function(){
             if(this.store.searchedString !== ""){
                 this.store.resultsList = [];
+                this.currentPage = 1;
                 this.store.totalPages = 0;
                 this.getMoviesList();
                 this.getTVSeriesList();
@@ -66,27 +67,27 @@ export default{
         },
         clearSearchInput: function(){
             this.store.searchedString = "";
-        }
-    },
+        },
+    }
 }
 </script>
 
 <template>
     <div class="container">
-            <div class="row align-items-center">
-                <div class="col-10">
-                    <div class="d-flex align-items-center border rounded">
-                        <input type="search" class="form-control border-0" id="search-input" placeholder="Search"  v-model="this.store.searchedString" @keyup.enter="getSearchResults()">
-                        <font-awesome-icon icon="fa-solid fa-xmark me-2" size="1x" @click="clearSearchInput()"/>
-                    </div>
-                </div>
-                <div class="col-2">
-                    <button class="btn btn-outline-secondary" @click="getSearchResults()">
-                        <font-awesome-icon icon="fa-solid fa-magnifying-glass" size="1x"/>
-                    </button>
+        <div class="row align-items-center">
+            <div class="col-10">
+                <div class="d-flex align-items-center border rounded">
+                    <input type="search" class="form-control border-0" id="search-input" placeholder="Search"  v-model="this.store.searchedString" @keyup.enter="getSearchResults()">
+                    <font-awesome-icon icon="fa-solid fa-xmark me-2" size="1x" @click="clearSearchInput()"/>
                 </div>
             </div>
+            <div class="col-2">
+                <button class="btn btn-outline-secondary" @click="getSearchResults()">
+                    <font-awesome-icon icon="fa-solid fa-magnifying-glass" size="1x"/>
+                </button>
+            </div>
         </div>
+    </div>
 </template>
 
 <style scoped lang="scss">
