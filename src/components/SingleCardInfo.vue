@@ -19,12 +19,14 @@ export default{
             return this.voteArray;
         },
         wordsLimit: function(text){
-            const words = text.split(' ');
-            let newText = '';
-            for (let index = 0; index < 15; index++) {
-                newText += words[index] + ' ';
+            if(text.length > 0){
+                const words = text.split(' ');
+                let newText = '';
+                for (let index = 0; index < 15; index++) {
+                    newText += words[index] + ' ';
             }
             return (newText.trim() + '...');
+            }
         }
     },
     props: {
@@ -39,7 +41,7 @@ export default{
 <template>
     <div class="card-body d-flex flex-column pb-1 pt-2">
         <p class="fs-6 mb-2 fw-bold text-center">{{ singleCard.title }} {{ singleCard.name }}</p>
-        <p class="mb-2"> {{ singleCard.original_title }} {{ singleCard.original_name }}</p>
+        <p class="mb-2" v-if="(singleCard.title !== singleCard.original_title || singleCard.name !== singleCard.original_name)"> {{ singleCard.original_title }} {{ singleCard.original_name }}</p>
         <p class="mb-2"> {{ wordsLimit(singleCard.overview) }} </p>
         <ul class="list-group list-group-flush mt-auto">
             <li class="list-group-item ps-0">
