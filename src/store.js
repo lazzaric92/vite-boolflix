@@ -6,5 +6,9 @@ export const store = reactive({
     searchedString: "",
     moviesList: [],
     tvSeriesList: [],
-    resultsList: []
+    resultsList: [],
+    currentPage: 1,
+    moviesListPages: 0,
+    tvSeriesListPages: 0,
+    totalPages: 0
 });

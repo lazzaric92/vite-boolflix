@@ -14,14 +14,19 @@ export default{
                 params: {
                 api_key: "861729733fec3d9d72d05bb5c85381e2",
                 query: this.store.searchedString,
-                language: "it-IT"
+                language: "it-IT",
+                page: this.store.currentPage
                 }
             })
             .then((response) => {
+                // lista film
                 this.store.moviesList = response.data.results;
                 console.log(this.store.moviesList);
                 this.store.resultsList = [...this.store.resultsList, ...this.store.moviesList];
-                // this.store.resultsList = this.store.resultsList.concat(this.store.moviesList);
+                // pagine
+                this.store.moviesListPages = response.data.total_pages;
+                this.store.totalPages = this.store.totalPages + this.store.moviesListPages;
+                console.log(this.store.moviesListPages);
             })
             .catch(function (error) {
                 console.log(error);
@@ -32,14 +37,20 @@ export default{
                 params: {
                 api_key: "861729733fec3d9d72d05bb5c85381e2",
                 query: this.store.searchedString,
-                language: "it-IT"
+                language: "it-IT",
+                page: this.store.currentPage
                 }
             })
             .then((response) => {
+                // serie tv
                 this.store.tvSeriesList = response.data.results;
                 console.log(this.store.tvSeriesList);
                 this.store.resultsList = [...this.store.resultsList, ...this.store.tvSeriesList];
-                // this.store.resultsList = this.store.resultsList.concat(this.store.tvSeriesList);
+                // pagine
+                this.store.tvSeriesListPages = response.data.total_pages;
+                this.store.totalPages = this.store.totalPages + this.store.tvSeriesListPages;
+                console.log(this.store.tvSeriesListPages);
+                console.log(this.store.totalPages);
             })
             .catch(function (error) {
                 console.log(error);
@@ -48,6 +59,7 @@ export default{
         getSearchResults: function(){
             if(this.store.searchedString !== ""){
                 this.store.resultsList = [];
+                this.store.totalPages = 0;
                 this.getMoviesList();
                 this.getTVSeriesList();
             }

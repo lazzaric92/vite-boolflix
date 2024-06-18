@@ -22,9 +22,15 @@ export default{
             if(text.length > 0){
                 const words = text.split(' ');
                 let newText = '';
-                for (let index = 0; index < 15; index++) {
-                    newText += words[index] + ' ';
-            }
+                if(words.length > 15){
+                    for (let index = 0; index < 15; index++) {
+                        newText += words[index] + ' ';
+                    }
+                } else {
+                    for (let index = 0; index < words.length - 1; index++) {
+                        newText += words[index] + ' ';
+                    }
+                }
             return (newText.trim() + '...');
             }
         }

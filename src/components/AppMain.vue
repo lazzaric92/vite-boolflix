@@ -18,9 +18,9 @@ export default{
 </script>
 
 <template>
-    <main class="py-4">
-        <div class="container-fluid">
-            <div class="row">
+    <main class="py-4 h-100">
+        <div class="container-fluid h-100">
+            <div class="row h-100">
                 <MainCardsList class="col-10 mx-auto" />
             </div>
         </div>
