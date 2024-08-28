@@ -4,7 +4,24 @@ import { store } from "../store.js";
 export default{
     data(){
         return {
-            store
+            store,
+            radioInputs: [
+                {
+                    'id': 0,
+                    'val': 'all',
+                    'label': 'All'
+                },
+                {
+                    'id': 1,
+                    'val': 'movies',
+                    'label': 'Movies'
+                },
+                {
+                    'id': 2,
+                    'val': 'series',
+                    'label': 'TV Series'
+                },
+            ]
         }
     },
     methods: {
@@ -17,14 +34,10 @@ export default{
 
 <template>
     <div v-if="this.store.resultsList.length > 0" class="mb-5 mt-3">
-        <input type="radio" id="all" value="all" name="list-shown" :class="(this.store.radioValue === 'all') ? 'active' : ''" @click="changeRadioValue('all')"/>
-        <label for="all" class="fw-bold py-2 px-4 me-3">All</label>
-
-        <input type="radio" id="movies" value="movies" name="list-shown" :class="(this.store.radioValue === 'movies') ? 'active' : ''" @click="changeRadioValue('movies')"/>
-        <label for="movies" class="fw-bold py-2 px-4 me-3">Movies</label>
-
-        <input type="radio" id="tv-series" value="tvSeries" name="list-shown" :class="(this.store.radioValue === 'series') ? 'active' : ''" @click="changeRadioValue('series')"/>
-        <label for="tv-series" class="fw-bold py-2 px-4 me-3">TV Series</label>
+        <template v-for="radInp in radioInputs" key="input.id">
+            <input type="radio" name="list-shown" :id=radInp.id :value=radInp.val :class="(this.store.radioValue === radInp.val) ? 'active' : ''" @click="changeRadioValue(radInp.val)"/>
+            <label :for=radInp.id class="fw-bold py-2 px-4 me-3">{{ radInp.label }}</label>
+        </template>
     </div>
 </template>
 
