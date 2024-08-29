@@ -1,14 +1,26 @@
 <script>
+import { store } from '../store';
 import HeaderSearch from './HeaderSearch.vue';
 
 export default{
     data(){
         return {
-            
+            store
         }
     },
     components: {
         HeaderSearch
+    },
+    methods: {
+        setOnFalse(){
+            this.store.onHomePage = false;
+            this.store.onMoviesPage = false;
+            this.store.onTvPage = false;
+            this.store.searchModeOn = false;
+        },
+    },
+    created(){
+        this.store.onHomePage = true;
     }
 }
 </script>
@@ -19,20 +31,17 @@ export default{
             <div class="container-fluid">
                 <a href="#" class="navbar-brand fw-bold">Boolflix</a>
                 <ul class="navbar-nav flex-row fw-bold">
-                    <li class="nav-item px-lg-2">
-                        <a href="#" class="nav-link active">Home</a>
+                    <li class="nav-item px-lg-2" :class="(this.store.onHomePage === true) ? 'page_active' : ''">
+                        <a href="#" class="nav-link" @click="[setOnFalse(), (this.store.onHomePage = true)]">Home</a>
                     </li>
-                    <li class="nav-item px-lg-2">
-                        <a href="#" class="nav-link">Film</a>
+                    <li class="nav-item px-lg-2" :class="(this.store.onMoviesPage === true) ? 'page_active' : ''">
+                        <a href="#" class="nav-link" @click="[setOnFalse(), (this.store.onMoviesPage = true)]">Film</a>
                     </li>
-                    <li class="nav-item px-lg-2">
-                        <a href="#" class="nav-link">Serie TV</a>
+                    <li class="nav-item px-lg-2" :class="(this.store.onTvPage === true) ? 'page_active' : ''">
+                        <a href="#" class="nav-link" @click="[setOnFalse(), (this.store.onTvPage = true)]">Serie TV</a>
                     </li>
                     <li class="nav-item px-lg-2">
                         <a href="#" class="nav-link">Generi</a>
-                    </li>
-                    <li class="nav-item px-lg-2">
-                        <a href="#" class="nav-link">Preferiti</a>
                     </li>
                 </ul>
                 <HeaderSearch class="w-50" />
@@ -59,6 +68,14 @@ export default{
 
         .navbar-brand {
             color: $my_logo-color;
+        }
+
+        li.page_active{
+            // border-bottom: 1px solid $my_logo-color;
+
+            a {
+                color: white;
+            }
         }
     }
 

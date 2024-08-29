@@ -12,4 +12,9 @@ export const store = reactive({
     tvSeriesListPages: 0,
     totalPages: 0,
     radioValue: 'all',
+
+    searchModeOn: false,
+    onHomePage: false,
+    onMoviesPage: false,
+    onTvPage: false,
 });

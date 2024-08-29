@@ -63,6 +63,16 @@ export default{
                 this.store.totalPages = 0;
                 this.getMoviesList();
                 this.getTVSeriesList();
+
+                if(this.store.searchModeOn === false){
+                    this.store.searchModeOn = true;
+                }
+
+                if(this.store.onHomePage === true || this.store.onMoviesPage === true || this.store.onTvPage === true){
+                    this.store.onHomePage = false;
+                    this.store.onMoviesPage = false;
+                    this.store.onTvPage = false;
+                }
             }
         },
         clearSearchInput: function(){

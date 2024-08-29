@@ -2,7 +2,10 @@
 import axios from 'axios';
 import { store } from "../store.js";
 
-import MainCardsList from './MainCardsList.vue';
+import MainCardsWrapper from './MainCardsWrapper.vue';
+import MainHome from './main_sections/MainHome.vue';
+import MainMovies from './main_sections/MainMovies.vue';
+import MainTv from './main_sections/MainTv.vue';
 
 export default{
     data(){
@@ -12,7 +15,10 @@ export default{
     },
     
     components: {
-        MainCardsList
+        MainCardsWrapper,
+        MainHome,
+        MainMovies,
+        MainTv,
     }
 }
 </script>
@@ -20,9 +26,10 @@ export default{
 <template>
     <main class="py-4 h-100">
         <div class="container-fluid h-100">
-            <div class="row h-100">
-                <MainCardsList class="col-10 mx-auto" />
-            </div>
+            <MainHome v-if="this.store.onHomePage === true"/>
+            <MainMovies v-if="this.store.onMoviesPage === true"/>
+            <MainTv v-if="this.store.onTvPage === true"/>
+            <MainCardsWrapper v-if="this.store.searchModeOn === true" />
         </div>
     </main>
 </template>
