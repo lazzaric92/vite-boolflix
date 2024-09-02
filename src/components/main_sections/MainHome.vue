@@ -1,6 +1,6 @@
 <script>
 import { store } from '../../store';
-import TrendingAll from '../carousels/TrendingAll.vue';
+import TrendingCarousel from '../carousels/TrendingCarousel.vue';
 
 
 export default{
@@ -10,14 +10,14 @@ export default{
         }
     },
     components: {
-        TrendingAll
-    }
+        TrendingCarousel
+    },
 }
 </script>
 
 <template>
     <div class="row h-100">
-        <TrendingAll />
+        <TrendingCarousel />
     </div>
 </template>
 

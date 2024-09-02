@@ -1,19 +1,22 @@
 <script>
 import { store } from '../../store';
+import TrendingCarousel from '../carousels/TrendingCarousel.vue';
 
 
 export default{
     data(){
         return {
-            message: 'Tv series',
             store
         }
+    },
+    components:{
+        TrendingCarousel
     }
 }
 </script>
 
 <template>
-<h1> {{ message }} </h1>
+    <TrendingCarousel />
 </template>
 
 <style scoped lang="scss">

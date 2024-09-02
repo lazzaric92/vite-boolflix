@@ -1,19 +1,21 @@
 <script>
 import axios from 'axios';
+import { store } from '../../store';
 
 export default{
     data(){
         return {
             trendingArray: [],
             carouselArray: [],
-            currentIndex: 1
+            currentIndex: 1,
+            store
         }
     },
     components: {
     },
     methods: {
         getTrendingList: function(){
-            axios.get('https://api.themoviedb.org/3/trending/all/week', {
+            axios.get(`https://api.themoviedb.org/3/trending/${this.store.trendingString}/week`, {
                 params: {
                 api_key: "861729733fec3d9d72d05bb5c85381e2",
                 language: "it-IT"
