@@ -65,7 +65,7 @@ export default{
 <style scoped lang="scss">
     @use '../styles/partials/variables' as *;
     header {
-        background-color: $my_bg-dark;
+        background-color: black;
 
         .navbar-brand {
             color: $my_logo-color;
