@@ -1,19 +1,24 @@
 <script>
 import { store } from '../../store';
+import TrendingAll from '../carousels/TrendingAll.vue';
 
 
 export default{
     data(){
         return {
-            message: 'Home',
             store
         }
+    },
+    components: {
+        TrendingAll
     }
 }
 </script>
 
 <template>
-<h1> {{ message }} </h1>
+    <div class="row h-100">
+        <TrendingAll />
+    </div>
 </template>
 
 <style scoped lang="scss">
