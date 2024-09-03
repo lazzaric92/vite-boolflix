@@ -75,24 +75,32 @@ export default{
 </script>
 
 <template>
-    <div class="col-12 d-flex flex-column align-items-center">
-        <template v-for="(arrayObj, index) in carouselArray">
-            <article v-if="index === this.currentIndex" class="d-flex justify-content-between mb-4">
-                <div class="article-info position-relative z-2 w-25 py-4 px-3 d-flex flex-column">
-                    <div class="text-center h-75 d-flex flex-column justify-content-center align-items-center">
-                        <h1 class="fs-3 text-white text-center mb-4">{{ (arrayObj.media_type === 'movie') ? arrayObj.title : arrayObj.name }}</h1>
-                        <h2 class="fs-4 text-secondary" v-if="arrayObj.title != arrayObj.original_title || arrayObj.name != arrayObj.original_name">{{ (arrayObj.media_type === 'movie') ? arrayObj.original_title : arrayObj.original_name }}</h2>
+    <div class="col-12">
+        <div class="d-flex">
+            <div class="slide-arrow-wrapper d-flex align-items-center">
+                <font-awesome-icon icon="fa-solid fa-angle-left" @click="prevSlide()" class="slide-arrow"/>
+            </div>
+            <template v-for="(arrayObj, index) in carouselArray">
+                <article v-if="index === this.currentIndex" class="flex-grow-1 d-flex justify-content-between mb-4">
+                    <div class="article-info position-relative z-2 w-25 py-4 px-3 d-flex flex-column">
+                        <div class="text-center h-75 d-flex flex-column justify-content-center align-items-center">
+                            <h1 class="fs-3 text-white text-center mb-4">{{ (arrayObj.media_type === 'movie') ? arrayObj.title : arrayObj.name }}</h1>
+                            <h2 class="fs-4 text-secondary" v-if="arrayObj.title != arrayObj.original_title || arrayObj.name != arrayObj.original_name">{{ (arrayObj.media_type === 'movie') ? arrayObj.original_title : arrayObj.original_name }}</h2>
+                        </div>
+                        <div class="h-25 d-flex justify-content-center align-items-center">
+                            <button class="btn btn-lg btn-outline-light">Maggiori informazioni </button>
+                        </div>
                     </div>
-                    <div class="h-25 d-flex justify-content-center align-items-center">
-                        <button class="btn btn-lg btn-outline-light">Maggiori informazioni </button>
+                    <div class="article-img position-relative h-100 w-75 text-end">
+                        <div class="dark_overlay position-absolute z-1 w-100 h-100"></div>
+                        <img :src="`https://image.tmdb.org/t/p/w1280/${arrayObj.backdrop_path}`" :alt="(arrayObj.media_type === 'movie') ? arrayObj.title : arrayObj.name" class="h-100">
                     </div>
-                </div>
-                <div class="article-img position-relative h-100 w-75 text-end">
-                    <div class="dark_overlay position-absolute z-1 w-100 h-100"></div>
-                    <img :src="`https://image.tmdb.org/t/p/w1280/${arrayObj.backdrop_path}`" :alt="(arrayObj.media_type === 'movie') ? arrayObj.title : arrayObj.name" class="h-100">
-                </div>
-            </article>
-        </template>
+                </article>
+            </template>
+            <div class="slide-arrow-wrapper d-flex align-items-center">
+                <font-awesome-icon icon="fa-solid fa-angle-right" @click="nextSlide()" class="slide-arrow"/>
+            </div>
+        </div>
         <div class="w-100 d-flex justify-content-center align-items-center pt-2">
             <template v-for="(arrayObj, index) in carouselArray">
                 <div class="carousel-dot rounded-circle p-1 mx-3" :class="(index === this.currentIndex) ? 'bg_active' : 'bg-white'" @click="this.currentIndex = index">
@@ -104,6 +112,18 @@ export default{
 
 <style scoped lang="scss">
 @use '../../styles/partials/variables' as *;
+
+    .slide-arrow-wrapper{
+        cursor: pointer;
+
+        .slide-arrow{
+            color: transparent;
+        }
+    }
+
+    .slide-arrow-wrapper:hover .slide-arrow{
+        color: white;
+    }
 
     article{
         width: 90%;
