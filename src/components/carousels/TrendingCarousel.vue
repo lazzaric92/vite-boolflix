@@ -93,7 +93,7 @@ export default{
         }
 
         .dark_overlay{
-            background: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(255,255,255,0) 100%);
+            background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 25%, rgba(255,255,255,0)50%, rgba(0,0,0,0.7) 75%, rgba(0,0,0,1) 100%);
         }
 
         .article-img{

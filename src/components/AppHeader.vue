@@ -72,7 +72,6 @@ export default{
         }
 
         li.page_active{
-            // border-bottom: 1px solid $my_logo-color;
 
             a {
                 color: white;

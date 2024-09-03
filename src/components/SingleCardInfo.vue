@@ -77,7 +77,7 @@ export default{
         font-size: .8rem;
 
         ul.list-group-flush > .list-group-item{
-            background-color: $my_bg-dark;
+            background-color: black;
         }
     }
 

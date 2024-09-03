@@ -48,7 +48,7 @@ export default{
         cursor: pointer;
 
         .card-info {
-            background-color: $my_bg-dark;
+            background-color: black;
             color: white;
         }
     }
