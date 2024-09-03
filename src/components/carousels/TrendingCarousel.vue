@@ -7,6 +7,7 @@ export default{
         return {
             trendingArray: [],
             carouselArray: [],
+            no_slides: 5,
             currentIndex: 0,
             store
         }
@@ -36,7 +37,7 @@ export default{
                 // console.log('START');
                 if(this.trendingArray.length > 0){
                     let index = 0;
-                    while (index < 5){
+                    while (index < this.no_slides){
                         this.carouselArray.push(this.trendingArray[index]);
                         index++;
                     }
@@ -45,10 +46,30 @@ export default{
                     // console.log('STOP');
                 }
             }, 500);
-        }
+        },
+        nextSlide(){
+            if(this.currentIndex < this.no_slides - 1){
+                this.currentIndex++;
+            } else {
+                this.currentIndex = 0;
+            }
+        },
+        prevSlide(){
+            if(this.currentIndex > 0){
+                this.currentIndex--;
+            } else {
+                this.currentIndex = this.no_slides - 1;
+            }
+        },
+        startCarouselClock(){
+            setInterval(() => {
+                this.nextSlide();
+            }, 2500)
+        },
     },
     created(){
-        this.getCarouselElements()
+        this.getCarouselElements();
+        this.startCarouselClock();
     }
 }
 </script>
