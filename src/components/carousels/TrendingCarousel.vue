@@ -5,18 +5,23 @@ import { store } from '../../store';
 export default{
     data(){
         return {
+            store,
             trendingArray: [],
             carouselArray: [],
             no_slides: 5,
             currentIndex: 0,
-            store
+            carouselClock: null,
+            isClockActive: false,
         }
+    },
+    props:{
+        trendingString : String,
     },
     components: {
     },
     methods: {
         getTrendingList: function(){
-            axios.get(`https://api.themoviedb.org/3/trending/${this.store.trendingString}/week`, {
+            axios.get(`https://api.themoviedb.org/3/trending/${this.trendingString}/week`, {
                 params: {
                 api_key: "861729733fec3d9d72d05bb5c85381e2",
                 language: "it-IT"
@@ -27,7 +32,7 @@ export default{
                 this.trendingArray = response.data.results;
                 console.log(this.trendingArray);
             })
-            .catch(function (error) {
+            .catch((error) => {
                 console.log(error);
             }); 
         },
@@ -62,10 +67,26 @@ export default{
             }
         },
         startCarouselClock(){
-            setInterval(() => {
-                this.nextSlide();
-            }, 2500)
+            if(this.isClockActive === false){
+                this.carouselClock = setInterval(() => {
+                    this.nextSlide();
+                }, 2500);
+                this.isClockActive = true;
+            }
         },
+        stopCarouselClock(){
+            if(this.isClockActive === true){
+                clearInterval(this.carouselArray);
+                this.isClockActive = false;
+            }
+        },
+        restartCarouselClock(){
+            if(this.isClockActive === true){
+                this.stopCarouselClock();
+                this.startCarouselClock();
+            }
+            
+        }
     },
     created(){
         this.getCarouselElements();
@@ -119,10 +140,10 @@ export default{
         .slide-arrow{
             color: transparent;
         }
-    }
 
-    .slide-arrow-wrapper:hover .slide-arrow{
-        color: white;
+        &:hover .slide-arrow{
+            color: white;
+        }
     }
 
     article{

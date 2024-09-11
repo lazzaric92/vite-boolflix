@@ -18,5 +18,4 @@ export const store = reactive({
     onMoviesPage: false,
     onTvPage: false,
 
-    trendingString: ''
 });

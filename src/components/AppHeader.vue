@@ -33,13 +33,13 @@ export default{
                 <a href="#" class="navbar-brand fw-bold">Boolflix</a>
                 <ul class="navbar-nav flex-row fw-bold">
                     <li class="nav-item px-lg-2" :class="(this.store.onHomePage === true) ? 'page_active' : ''">
-                        <a href="#" class="nav-link" @click="[setOnFalse(), (this.store.onHomePage = true), (this.store.trendingString = 'all')]">Home</a>
+                        <a href="#" class="nav-link" @click="[setOnFalse(), (this.store.onHomePage = true)]">Home</a>
                     </li>
                     <li class="nav-item px-lg-2" :class="(this.store.onMoviesPage === true) ? 'page_active' : ''">
-                        <a href="#" class="nav-link" @click="[setOnFalse(), (this.store.onMoviesPage = true), (this.store.trendingString = 'movie')]">Film</a>
+                        <a href="#" class="nav-link" @click="[setOnFalse(), (this.store.onMoviesPage = true)]">Film</a>
                     </li>
                     <li class="nav-item px-lg-2" :class="(this.store.onTvPage === true) ? 'page_active' : ''">
-                        <a href="#" class="nav-link" @click="[setOnFalse(), (this.store.onTvPage = true), (this.store.trendingString = 'tv')]">Serie TV</a>
+                        <a href="#" class="nav-link" @click="[setOnFalse(), (this.store.onTvPage = true)]">Serie TV</a>
                     </li>
                     <li class="nav-item px-lg-2">
                         <a href="#" class="nav-link">Generi</a>

@@ -16,7 +16,7 @@ export default{
 </script>
 
 <template>
-    <TrendingCarousel />
+    <TrendingCarousel trendingString="movie"/>
 </template>
 
 <style scoped lang="scss">

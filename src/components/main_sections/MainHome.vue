@@ -1,5 +1,6 @@
 <script>
 import { store } from '../../store';
+import DiscoverCarousel from '../carousels/DiscoverCarousel.vue';
 import TrendingCarousel from '../carousels/TrendingCarousel.vue';
 
 
@@ -10,15 +11,18 @@ export default{
         }
     },
     components: {
-        TrendingCarousel
+        TrendingCarousel,
+        DiscoverCarousel
     },
 }
 </script>
 
 <template>
     <div class="row h-100">
-        <TrendingCarousel />
+        <TrendingCarousel trendingString="all"/>
     </div>
+    <DiscoverCarousel discoverString="movie" carouselTitle="Film che potrebbero interessarti" class="mb-5"/>
+    <DiscoverCarousel discoverString="tv" carouselTitle="Serie Tv da guardare" class="mb-5"/>
 </template>
 
 <style scoped lang="scss">

@@ -26,9 +26,9 @@ export default{
 <template>
     <main class="py-4 h-100">
         <div class="container-fluid h-100">
-            <MainHome v-if="this.store.onHomePage === true"/>
-            <MainMovies v-if="this.store.onMoviesPage === true"/>
-            <MainTv v-if="this.store.onTvPage === true"/>
+            <MainHome v-if="this.store.onHomePage === true" class="overflow-y-scroll"/>
+            <MainMovies v-if="this.store.onMoviesPage === true" class="overflow-y-scroll"/>
+            <MainTv v-if="this.store.onTvPage === true" class="overflow-y-scroll"/>
             <MainCardsWrapper v-if="this.store.searchModeOn === true" />
         </div>
     </main>
