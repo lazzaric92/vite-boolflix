@@ -70,7 +70,7 @@ export default{
             if(this.isClockActive === false){
                 this.carouselClock = setInterval(() => {
                     this.nextSlide();
-                }, 2500);
+                }, 3000);
                 this.isClockActive = true;
             }
         },
@@ -109,7 +109,7 @@ export default{
                             <h2 class="fs-4 text-secondary" v-if="arrayObj.title != arrayObj.original_title || arrayObj.name != arrayObj.original_name">{{ (arrayObj.media_type === 'movie') ? arrayObj.original_title : arrayObj.original_name }}</h2>
                         </div>
                         <div class="h-25 d-flex justify-content-center align-items-center">
-                            <button class="btn btn-lg btn-outline-light">Maggiori informazioni </button>
+                            <button class="btn btn-lg">Maggiori informazioni </button>
                         </div>
                     </div>
                     <div class="article-img position-relative h-100 w-75 text-end">
@@ -152,10 +152,25 @@ export default{
 
         .article-info{
             box-shadow: 100px 0px 30px 0 black;
+
+            button{
+                border: 1px solid white;
+                color: white;
+                background-color: transparent;
+
+                &:focus,
+                &:hover{
+                    transition: all .25s linear;
+                    border: 1px solid black;
+                    color: black;
+                    background-color: white;
+                }
+            }
+
         }
 
         .dark_overlay{
-            background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 25%, rgba(255,255,255,0)50%, rgba(0,0,0,0.7) 75%, rgba(0,0,0,1) 100%);
+            background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 20%, rgba(0,0,0,0.7) 35%, rgba(255,255,255,0)50%, rgba(0,0,0,0.7) 75%, rgba(0,0,0,1) 100%);
         }
 
         .article-img{

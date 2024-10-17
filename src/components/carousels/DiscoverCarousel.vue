@@ -56,7 +56,7 @@ export default{
 <template>
     <div class="row">
         <div class="col-12 mb-3">
-            <h3 class="fs-4 text-white">{{ carouselTitle }}</h3>
+            <h3 class="fs-4 text-white ms-3">{{ carouselTitle }}</h3>
         </div>
         <div class="col-12">
             <div class="d-flex">
