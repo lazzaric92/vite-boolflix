@@ -59,20 +59,21 @@ export default{
             <h3 class="fs-4 text-white ms-3">{{ carouselTitle }}</h3>
         </div>
         <div class="col-12">
-            <div class="d-flex">
-                <div class="slide-arrow-wrapper d-flex align-items-center">
+            <div class="d-flex w-100 position-relative">
+                <div class="slide-arrow-wrapper prev d-flex align-items-center">
                     <font-awesome-icon icon="fa-solid fa-angle-left" class="slide-arrow"/>
                 </div>
-                <div class="wrapper d-flex">
-                    <template v-for="(item, index) in carouselArray" >
-                        <article class="border border-light rounded">
+
+                <div class="carousel">
+                    <div class="wrapper">
+                        <article class="border border-light rounded" v-for="(item, index) in carouselArray">
                             <!-- <img :src="`https://image.tmdb.org/t/p/w342/${object.backdrop_path}`" :alt="(item.media_type === 'movie') ? item.title : item.name" class="h-100"> -->
                             <p>card</p>
                         </article>
-                    </template>
+                    </div>
                 </div>
                 
-                <div class="slide-arrow-wrapper d-flex align-items-center">
+                <div class="slide-arrow-wrapper next d-flex align-items-center">
                     <font-awesome-icon icon="fa-solid fa-angle-right" class="slide-arrow"/>
                 </div>
             </div>
@@ -85,32 +86,69 @@ export default{
 
 .slide-arrow-wrapper{
     cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    &.prev{
+        top: 0;
+        left: 0;
+    }
+
+    &.next{
+        top: 0;
+        right: 0;
+    }
 
     .slide-arrow{
-        color: transparent;
+        color: white;
+        opacity: .5;
+        font-size: 1.2rem;
     }
 
     &:hover .slide-arrow{
-        color: white;
+        opacity: 1;
+        scale: 1.5;
+        transition: all .2s ease-in;
     }
 }
 
-article{
-    width: calc(100% / 5);
-    aspect-ratio: 2;
-    margin-right: 1rem;
-
-    .article-img{
-        overflow-x: clip;
-    }
+.carousel {
+    overflow-x: scroll;
+    scrollbar-color: transparent transparent;
+    width: 98vw;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .wrapper {
-    overflow-x: scroll;
+    width: 100%;
+    overflow: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
-
+    display: grid;
+    grid-gap: $my-gap;
+    grid-auto-flow: column;
     
+    article{
+    width: calc(100vw / 5 - $my_gap * 5);
+    aspect-ratio: 3/2;
+    margin-right: 1rem;
+
+
+        .article-img{
+            overflow-x: clip;
+        }
+    }
+
+    article:first-child{
+        margin-left: $my_gap;
+    }
 }
 
 
