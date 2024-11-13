@@ -5,9 +5,11 @@ export default{
         return {
             discoverArray: [],
             carouselArray: [],
-            no_slides: 25,
-            gap: 12,
+            tot_slides: 25,
             no_articles: 5,
+            gap: 12,
+            counter: 0,
+            counterMax: null,
         }
     },
     props:{
@@ -34,34 +36,70 @@ export default{
         getCarouselElements(){
             this.getDiscoverList();
             const checkingClock = setInterval(() => {
-                // console.log('START');
                 if(this.discoverArray.length > 0){
                     let index = 0;
-                    while (index < this.no_slides){
+                    while (index < this.tot_slides){
                         this.carouselArray.push(this.discoverArray[index]);
                         index++;
                     }
                     clearInterval(checkingClock);
                     console.log(this.carouselArray);
-                    // console.log('STOP');
                 }
             }, 500);
         },
         clickHandle(e){
+            // DOM ELEMENTS
+            const prevBtn = e.currentTarget.parentElement.children[0];
             const carouselEl = e.currentTarget.parentElement.children[1];
+            const nextBtn = e.currentTarget.parentElement.children[2];
             const wrapperEl = carouselEl.children[0];
-            const carouselWidth = carouselEl.offsetWidth;
             const articleWidth = wrapperEl.children[0].offsetWidth;
-            console.log(this.gap * this.no_articles + articleWidth * this.no_articles);
+
+
             if(e.currentTarget.classList.contains('next')){
+                if(this.counter < this.counterMax){
+                    this.counter ++;
+                }
                 wrapperEl.scrollBy((this.gap * this.no_articles + articleWidth * this.no_articles + 80), 0);
+
+                // nextBtn display
+                if(this.counter >= this.counterMax){
+                    nextBtn.style.display = 'none';
+                } else {
+                    nextBtn.style.display = 'flex';
+                }
+
+                // prevBtn display
+                prevBtn.style.display = 'flex';
+
             } else if(e.currentTarget.classList.contains('prev')){
                 wrapperEl.scrollBy(-(this.gap * this.no_articles + articleWidth * this.no_articles + 80), 0);
+                if(this.counter > 0){
+                    this.counter--;
+                }
+
+                // prevBtn display
+                if(this.counter === 0){
+                    prevBtn.style.display = 'none';
+                } else {
+                    prevBtn.style.display = 'flex';
+                };
+
+                // nextBtn display
+                nextBtn.style.display = 'flex';
+            }
+        },
+        getCounterMax(){
+            if(this.tot_slides % this.no_articles === 0){
+                this.counterMax = this.tot_slides / this.no_articles - 1;
+            } else {
+                this.counterMax = Math.floor(this.tot_slides / this.no_articles);
             }
         }
     },
     created(){
         this.getCarouselElements();
+        this.getCounterMax();
     }
 }
 
@@ -74,7 +112,7 @@ export default{
         </div>
         <div class="col-12">
             <div class="d-flex w-100 position-relative">
-                <div class="slide-arrow-wrapper prev d-flex align-items-center" @click="clickHandle">
+                <div class="slide-arrow-wrapper prev" @click="clickHandle">
                     <font-awesome-icon icon="fa-solid fa-angle-left" class="slide-arrow" />
                 </div>
 
@@ -87,7 +125,7 @@ export default{
                     </div>
                 </div>
                 
-                <div class="slide-arrow-wrapper next d-flex align-items-center" @click="clickHandle">
+                <div class="slide-arrow-wrapper next" @click="clickHandle">
                     <font-awesome-icon icon="fa-solid fa-angle-right" class="slide-arrow" />
                 </div>
             </div>
@@ -112,6 +150,7 @@ export default{
     &.prev{
         top: 0;
         left: 0;
+        display: none;
     }
 
     &.next{
