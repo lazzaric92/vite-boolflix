@@ -6,6 +6,8 @@ export default{
             discoverArray: [],
             carouselArray: [],
             no_slides: 25,
+            gap: 12,
+            no_articles: 5,
         }
     },
     props:{
@@ -44,6 +46,18 @@ export default{
                     // console.log('STOP');
                 }
             }, 500);
+        },
+        clickHandle(e){
+            const carouselEl = e.currentTarget.parentElement.children[1];
+            const wrapperEl = carouselEl.children[0];
+            const carouselWidth = carouselEl.offsetWidth;
+            const articleWidth = wrapperEl.children[0].offsetWidth;
+            console.log(this.gap * this.no_articles + articleWidth * this.no_articles);
+            if(e.currentTarget.classList.contains('next')){
+                wrapperEl.scrollBy((this.gap * this.no_articles + articleWidth * this.no_articles + 80), 0);
+            } else if(e.currentTarget.classList.contains('prev')){
+                wrapperEl.scrollBy(-(this.gap * this.no_articles + articleWidth * this.no_articles + 80), 0);
+            }
         }
     },
     created(){
@@ -60,21 +74,21 @@ export default{
         </div>
         <div class="col-12">
             <div class="d-flex w-100 position-relative">
-                <div class="slide-arrow-wrapper prev d-flex align-items-center">
-                    <font-awesome-icon icon="fa-solid fa-angle-left" class="slide-arrow"/>
+                <div class="slide-arrow-wrapper prev d-flex align-items-center" @click="clickHandle">
+                    <font-awesome-icon icon="fa-solid fa-angle-left" class="slide-arrow" />
                 </div>
 
                 <div class="carousel">
                     <div class="wrapper">
                         <article class="border border-light rounded" v-for="(item, index) in carouselArray">
                             <!-- <img :src="`https://image.tmdb.org/t/p/w342/${object.backdrop_path}`" :alt="(item.media_type === 'movie') ? item.title : item.name" class="h-100"> -->
-                            <p>card</p>
+                            <p class="text-warning ms-2">{{ index }}</p>
                         </article>
                     </div>
                 </div>
                 
-                <div class="slide-arrow-wrapper next d-flex align-items-center">
-                    <font-awesome-icon icon="fa-solid fa-angle-right" class="slide-arrow"/>
+                <div class="slide-arrow-wrapper next d-flex align-items-center" @click="clickHandle">
+                    <font-awesome-icon icon="fa-solid fa-angle-right" class="slide-arrow" />
                 </div>
             </div>
         </div>
@@ -89,7 +103,7 @@ export default{
     position: absolute;
     z-index: 1;
     height: 100%;
-    width: 40px;
+    width: $arrow-wrapper-width;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -119,7 +133,7 @@ export default{
 }
 
 .carousel {
-    overflow-x: scroll;
+    overflow-x: auto;
     scrollbar-color: transparent transparent;
     width: 98vw;
     margin-left: auto;
@@ -128,7 +142,7 @@ export default{
 
 .wrapper {
     width: 100%;
-    overflow: auto;
+    overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
     display: grid;
@@ -136,7 +150,7 @@ export default{
     grid-auto-flow: column;
     
     article{
-    width: calc(100vw / 5 - $my_gap * 5);
+    width: calc((100vw - $my_gap * 6) / 6 );
     aspect-ratio: 3/2;
     margin-right: 1rem;
 
@@ -147,7 +161,11 @@ export default{
     }
 
     article:first-child{
-        margin-left: $my_gap;
+        margin-left: $arrow-wrapper-width + $my_gap;
+    }
+
+    article:last-child{
+        margin-right: $arrow-wrapper-width + $my_gap;
     }
 }
 

@@ -30,7 +30,7 @@ export default{
             .then((response) => {
                 // lista film
                 this.trendingArray = response.data.results;
-                console.log(this.trendingArray);
+                // console.log(this.trendingArray);
             })
             .catch((error) => {
                 console.log(error);
@@ -47,7 +47,7 @@ export default{
                         index++;
                     }
                     clearInterval(checkingClock);
-                    console.log(this.carouselArray);
+                    // console.log(this.carouselArray);
                     // console.log('STOP');
                 }
             }, 500);
