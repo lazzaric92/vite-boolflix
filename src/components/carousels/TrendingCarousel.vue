@@ -98,7 +98,7 @@ export default{
 <template>
     <div class="col-12">
         <div class="d-flex">
-            <div class="slide-arrow-wrapper d-flex align-items-center">
+            <div class="slide-arrow-wrapper d-flex align-items-center justify-content-center">
                 <font-awesome-icon icon="fa-solid fa-angle-left" @click="prevSlide()" class="slide-arrow"/>
             </div>
             <template v-for="(arrayObj, index) in carouselArray">
@@ -118,7 +118,7 @@ export default{
                     </div>
                 </article>
             </template>
-            <div class="slide-arrow-wrapper d-flex align-items-center">
+            <div class="slide-arrow-wrapper d-flex align-items-center justify-content-center">
                 <font-awesome-icon icon="fa-solid fa-angle-right" @click="nextSlide()" class="slide-arrow"/>
             </div>
         </div>
@@ -136,6 +136,7 @@ export default{
 
     .slide-arrow-wrapper{
         cursor: pointer;
+        width: 40px;
 
         .slide-arrow{
             color: transparent;
