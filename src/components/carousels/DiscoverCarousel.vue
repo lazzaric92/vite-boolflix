@@ -1,5 +1,7 @@
 <script>
 import axios from 'axios';
+import SmallerCarouselCard from './SmallerCarouselCard.vue';
+
 export default{
     data(){
         return {
@@ -15,6 +17,9 @@ export default{
     props:{
         carouselTitle: String,
         discoverString : String,
+    },
+    components: {
+        SmallerCarouselCard
     },
     methods: {
         getDiscoverList: function(){
@@ -118,9 +123,8 @@ export default{
 
                 <div class="carousel">
                     <div class="wrapper">
-                        <article class="border border-light rounded" v-for="(item, index) in carouselArray">
-                            <!-- <img :src="`https://image.tmdb.org/t/p/w342/${object.backdrop_path}`" :alt="(item.media_type === 'movie') ? item.title : item.name" class="h-100"> -->
-                            <p class="text-warning ms-2">{{ index }}</p>
+                        <article class="border border-light rounded" v-for="(obj, index) in carouselArray" @click="console.log(obj.title)">
+                            <SmallerCarouselCard :item="obj" />
                         </article>
                     </div>
                 </div>
