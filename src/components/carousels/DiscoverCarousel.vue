@@ -88,8 +88,6 @@ export default{
             const wrapperEl = carouselEl.children[0];
             const articleWidth = wrapperEl.children[0].offsetWidth;
 
-            console.log(wrapperEl.scrollLeft, wrapperEl.offsetWidth, Math.floor(wrapperEl.scrollLeft / wrapperEl.offsetWidth) + 1);
-
             if(e.currentTarget.classList.contains('next')){
                 // scroll behaviour
                 wrapperEl.scrollBy((this.gap * this.no_articles + articleWidth * this.no_articles + 80), 0);

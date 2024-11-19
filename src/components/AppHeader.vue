@@ -42,18 +42,6 @@ export default{
                     <li class="nav-item px-lg-2" :class="$route.name === 'tv' ? 'page_active' : ''">
                         <router-link class="nav-link" to="/tv">Serie TV</router-link>
                     </li>
-                    <!-- <li class="nav-item px-lg-2" :class="(this.store.onHomePage === true) ? 'page_active' : ''">
-                        <a class="nav-link" @click="[setOnFalse(), (this.store.onHomePage = true)]">Home</a>
-                    </li>
-                    <li class="nav-item px-lg-2" :class="(this.store.onMoviesPage === true) ? 'page_active' : ''">
-                        <a class="nav-link" @click="[setOnFalse(), (this.store.onMoviesPage = true)]">Film</a>
-                    </li>
-                    <li class="nav-item px-lg-2" :class="(this.store.onTvPage === true) ? 'page_active' : ''">
-                        <a class="nav-link" @click="[setOnFalse(), (this.store.onTvPage = true)]">Serie TV</a>
-                    </li> -->
-                    <!-- <li class="nav-item px-lg-2">
-                        <a href="#" class="nav-link">Generi</a>
-                    </li> -->
                 </ul>
                 <HeaderSearch class="w-50" />
                 <ul class="navbar-nav d-flex flex-row align-items-center fw-bold">

@@ -1,9 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router';
-
 import MainHome from './components/pages/MainHome.vue';
 import MainMovies from './components/pages/MainMovies.vue';
 import MainTv from './components/pages/MainMovies.vue';
 import MainCardsWrapper from './components/MainCardsWrapper.vue';
+
+import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -28,7 +28,14 @@ const router = createRouter({
             name: 'search',
             component: MainCardsWrapper
         },
-    ]
+    ],
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+          return savedPosition;  // Torna alla posizione precedente se stai usando il pulsante "indietro"
+        } else {
+          return { top: 0 }; // Scroll all'inizio
+        }
+    }
 });
 export { router };
 

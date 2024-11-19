@@ -13,9 +13,4 @@ export const store = reactive({
     totalPages: 0,
     radioValue: 'all',
 
-    searchModeOn: false,
-    onHomePage: false,
-    onMoviesPage: false,
-    onTvPage: false,
-
 });

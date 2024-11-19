@@ -1,7 +1,12 @@
 <script >
 import "@fontsource/noto-sans-jp";
+import { RouterLink, RouterView } from 'vue-router';
 import AppMain from './components/AppMain.vue';
 import AppHeader from './components/AppHeader.vue';
+import MainHome from "./components/pages/MainHome.vue";
+import MainMovies from "./components/pages/MainMovies.vue";
+import MainTv from "./components/pages/MainTv.vue";
+import MainCardsWrapper from "./components/MainCardsWrapper.vue";
 
 export default{
   data(){
@@ -10,8 +15,12 @@ export default{
       }
   },
   components: {
+    AppHeader,
     AppMain,
-    AppHeader
+    MainHome,
+    MainMovies,
+    MainTv,
+    MainCardsWrapper
   }
 }
 </script>

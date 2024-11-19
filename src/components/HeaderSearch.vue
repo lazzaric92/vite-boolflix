@@ -1,6 +1,8 @@
 <script>
 import axios from 'axios';
 import { store } from "../store.js";
+import { RouterLink } from 'vue-router';
+import { router } from '../router.js';
 
 export default{
     data(){
@@ -63,21 +65,15 @@ export default{
                 this.store.totalPages = 0;
                 this.getMoviesList();
                 this.getTVSeriesList();
-
-                if(this.store.searchModeOn === false){
-                    this.store.searchModeOn = true;
-                }
-
-                if(this.store.onHomePage === true || this.store.onMoviesPage === true || this.store.onTvPage === true){
-                    this.store.onHomePage = false;
-                    this.store.onMoviesPage = false;
-                    this.store.onTvPage = false;
-                }
             }
         },
         clearSearchInput: function(){
             this.store.searchedString = "";
         },
+        startSearch(){
+            const searchBtn = document.getElementById('search-btn');
+            searchBtn.click();
+        }
     }
 }
 </script>
@@ -87,14 +83,16 @@ export default{
         <div class="row align-items-center">
             <div class="col-10">
                 <div class="d-flex align-items-center border rounded">
-                    <input type="search" class="form-control border-0" id="search-input" placeholder="Search"  v-model="this.store.searchedString" @keyup.enter="getSearchResults()">
-                    <font-awesome-icon icon="fa-solid fa-xmark me-2" size="1x" @click="clearSearchInput()"/>
+                    <input type="search" class="form-control border-0" id="search-input" placeholder="Search"  v-model="this.store.searchedString" @keyup.enter="startSearch()">
+                    <font-awesome-icon icon="fa-solid fa-xmark me-2" size="1x" v-if="this.store.searchedString.trim().length > 0" @click="clearSearchInput()"/>
                 </div>
             </div>
             <div class="col-2">
-                <button class="btn btn-outline-secondary" @click="getSearchResults()">
-                    <font-awesome-icon icon="fa-solid fa-magnifying-glass" size="1x"/>
-                </button>
+                <RouterLink to="/search" id="search-btn" @click="getSearchResults()">
+                    <button class="btn btn-outline-secondary" >
+                        <font-awesome-icon icon="fa-solid fa-magnifying-glass" size="1x"/>
+                    </button>
+                </RouterLink>
             </div>
         </div>
     </div>
