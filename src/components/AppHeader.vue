@@ -13,15 +13,8 @@ export default{
         HeaderSearch
     },
     methods: {
-        setOnFalse(){
-            this.store.onHomePage = false;
-            this.store.onMoviesPage = false;
-            this.store.onTvPage = false;
-            this.store.searchModeOn = false;
-        },
     },
     created(){
-        this.store.onHomePage = true;
         this.store.trendingString = 'all';
     }
 }

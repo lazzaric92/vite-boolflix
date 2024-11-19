@@ -1,6 +1,6 @@
 import MainHome from './components/pages/MainHome.vue';
 import MainMovies from './components/pages/MainMovies.vue';
-import MainTv from './components/pages/MainMovies.vue';
+import MainTv from './components/pages/MainTv.vue';
 import MainCardsWrapper from './components/MainCardsWrapper.vue';
 
 import { createRouter, createWebHistory } from 'vue-router';
