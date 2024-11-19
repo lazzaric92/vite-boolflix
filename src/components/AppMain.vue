@@ -3,9 +3,9 @@ import axios from 'axios';
 import { store } from "../store.js";
 
 import MainCardsWrapper from './MainCardsWrapper.vue';
-import MainHome from './main_sections/MainHome.vue';
-import MainMovies from './main_sections/MainMovies.vue';
-import MainTv from './main_sections/MainTv.vue';
+import MainHome from './pages/MainHome.vue';
+import MainMovies from './pages/MainMovies.vue';
+import MainTv from './pages/MainTv.vue';
 
 export default{
     data(){
@@ -26,10 +26,16 @@ export default{
 <template>
     <main class="py-4 h-100">
         <div class="container-fluid h-100">
-            <MainHome v-if="this.store.onHomePage === true" class="overflow-y-scroll"/>
+            <router-view>
+                <MainHome class="overflow-y-scroll"/>
+                <MainMovies class="overflow-y-scroll"/>
+                <MainTv class="overflow-y-scroll"/>
+                <MainCardsWrapper  />
+            </router-view>
+            <!-- <MainHome v-if="this.store.onHomePage === true" class="overflow-y-scroll"/>
             <MainMovies v-if="this.store.onMoviesPage === true" class="overflow-y-scroll"/>
             <MainTv v-if="this.store.onTvPage === true" class="overflow-y-scroll"/>
-            <MainCardsWrapper v-if="this.store.searchModeOn === true" />
+            <MainCardsWrapper v-if="this.store.searchModeOn === true" /> -->
         </div>
     </main>
 </template>

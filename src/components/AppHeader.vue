@@ -1,4 +1,5 @@
 <script>
+import { RouterLink } from 'vue-router';
 import { store } from '../store';
 import HeaderSearch from './HeaderSearch.vue';
 
@@ -32,7 +33,16 @@ export default{
             <div class="container-fluid">
                 <a href="#" class="navbar-brand fw-bold">Boolflix</a>
                 <ul class="navbar-nav flex-row fw-bold">
-                    <li class="nav-item px-lg-2" :class="(this.store.onHomePage === true) ? 'page_active' : ''">
+                    <li class="nav-item px-lg-2" :class="$route.name === 'home' ? 'page_active' : ''">
+                        <router-link class="nav-link" to="/">Home</router-link>
+                    </li>
+                    <li class="nav-item px-lg-2" :class="$route.name === 'movies' ? 'page_active' : ''">
+                        <router-link class="nav-link" to="/movies">Film</router-link>
+                    </li>
+                    <li class="nav-item px-lg-2" :class="$route.name === 'tv' ? 'page_active' : ''">
+                        <router-link class="nav-link" to="/tv">Serie TV</router-link>
+                    </li>
+                    <!-- <li class="nav-item px-lg-2" :class="(this.store.onHomePage === true) ? 'page_active' : ''">
                         <a class="nav-link" @click="[setOnFalse(), (this.store.onHomePage = true)]">Home</a>
                     </li>
                     <li class="nav-item px-lg-2" :class="(this.store.onMoviesPage === true) ? 'page_active' : ''">
@@ -40,7 +50,7 @@ export default{
                     </li>
                     <li class="nav-item px-lg-2" :class="(this.store.onTvPage === true) ? 'page_active' : ''">
                         <a class="nav-link" @click="[setOnFalse(), (this.store.onTvPage = true)]">Serie TV</a>
-                    </li>
+                    </li> -->
                     <!-- <li class="nav-item px-lg-2">
                         <a href="#" class="nav-link">Generi</a>
                     </li> -->
@@ -72,13 +82,12 @@ export default{
         }
 
         li.page_active{
-
-            a {
+            .nav-link{
                 color: white;
             }
         }
 
-        a.nav-link{
+        .nav-link{
             cursor: pointer;
         }
     }
