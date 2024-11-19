@@ -7,11 +7,10 @@ export default{
         return {
             discoverArray: [],
             carouselArray: [],
-            tot_slides: 25,
+            tot_slides: 20,
             no_articles: 5,
             gap: 12,
-            counter: 0,
-            counterMax: null,
+            counterMax: null, // number of clicks to reach the end of the carousel
         }
     },
     props:{
@@ -49,8 +48,37 @@ export default{
                     }
                     clearInterval(checkingClock);
                     console.log(this.carouselArray);
+                    this.checkArrows();
                 }
             }, 500);
+        },
+        checkArrows(){
+            // since the counter reset when refreshing the page but firefox maintain the carousel position, in this way the clickCounter is updated to the right value after refreshing and the arrows display is fixed
+            const prevBtn = document.querySelector('.prev');
+            const nextBtn = document.querySelector('.next');
+            const wrapperEl = document.querySelector('.carousel > .wrapper');
+            // wrapperEl is null in the beginning so this function needs to be called in the getCarouselElements function
+
+            // nextBtn display
+            if((Math.floor(wrapperEl.scrollLeft / wrapperEl.offsetWidth) + 1) >= this.counterMax){
+                nextBtn.style.display = 'none';
+            } else {
+                nextBtn.style.display = 'flex';
+            }
+
+            // prevBtn display
+            if(wrapperEl.scrollLeft <= 0){
+                prevBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = 'flex';
+            };
+        },
+        getCounterMax(){
+            if(this.tot_slides % this.no_articles === 0){
+                this.counterMax = this.tot_slides / this.no_articles - 1;
+            } else {
+                this.counterMax = Math.floor(this.tot_slides / this.no_articles);
+            }
         },
         clickHandle(e){
             // DOM ELEMENTS
@@ -60,15 +88,14 @@ export default{
             const wrapperEl = carouselEl.children[0];
             const articleWidth = wrapperEl.children[0].offsetWidth;
 
+            console.log(wrapperEl.scrollLeft, wrapperEl.offsetWidth, Math.floor(wrapperEl.scrollLeft / wrapperEl.offsetWidth) + 1);
 
             if(e.currentTarget.classList.contains('next')){
-                if(this.counter < this.counterMax){
-                    this.counter ++;
-                }
+                // scroll behaviour
                 wrapperEl.scrollBy((this.gap * this.no_articles + articleWidth * this.no_articles + 80), 0);
 
                 // nextBtn display
-                if(this.counter >= this.counterMax){
+                if(Math.floor(wrapperEl.scrollLeft / wrapperEl.offsetWidth) + 1 >= this.counterMax - 1){
                     nextBtn.style.display = 'none';
                 } else {
                     nextBtn.style.display = 'flex';
@@ -78,13 +105,11 @@ export default{
                 prevBtn.style.display = 'flex';
 
             } else if(e.currentTarget.classList.contains('prev')){
+                // scroll behaviour
                 wrapperEl.scrollBy(-(this.gap * this.no_articles + articleWidth * this.no_articles + 80), 0);
-                if(this.counter > 0){
-                    this.counter--;
-                }
 
                 // prevBtn display
-                if(this.counter === 0){
+                if(wrapperEl.scrollLeft / wrapperEl.offsetWidth <= 1){
                     prevBtn.style.display = 'none';
                 } else {
                     prevBtn.style.display = 'flex';
@@ -92,13 +117,6 @@ export default{
 
                 // nextBtn display
                 nextBtn.style.display = 'flex';
-            }
-        },
-        getCounterMax(){
-            if(this.tot_slides % this.no_articles === 0){
-                this.counterMax = this.tot_slides / this.no_articles - 1;
-            } else {
-                this.counterMax = Math.floor(this.tot_slides / this.no_articles);
             }
         }
     },
@@ -123,7 +141,7 @@ export default{
 
                 <div class="carousel">
                     <div class="wrapper">
-                        <article v-for="(obj, index) in carouselArray" @click="console.log(obj.title)">
+                        <article v-for="(obj, index) in carouselArray">
                             <SmallerCarouselCard :item="obj" />
                         </article>
                     </div>
@@ -149,7 +167,6 @@ export default{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.1);
     
     .slide-arrow{
         color: white;
