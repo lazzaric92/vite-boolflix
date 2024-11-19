@@ -108,7 +108,8 @@ export default{
                             <h1 class="fs-3 text-white text-center mb-4">{{ (arrayObj.media_type === 'movie') ? arrayObj.title : arrayObj.name }}</h1>
                             <h2 class="fs-4 text-secondary" v-if="arrayObj.title != arrayObj.original_title || arrayObj.name != arrayObj.original_name">{{ (arrayObj.media_type === 'movie') ? arrayObj.original_title : arrayObj.original_name }}</h2>
                         </div>
-                        <div class="h-25 d-flex justify-content-center align-items-center">
+                        <div class="h-25 d-flex flex-column justify-content-center align-items-center">
+                            <p class="text-white mb-4 fs-5"><font-awesome-icon icon="fa-solid fa-tag" class="me-2" /> {{ (arrayObj.media_type === 'movie') ? 'Film' : 'Serie TV' }}</p>
                             <button class="btn btn-lg">Maggiori informazioni </button>
                         </div>
                     </div>

@@ -22,7 +22,7 @@ export default{
         <TrendingCarousel trendingString="all"/>
     </div>
     <DiscoverCarousel discoverString="movie" carouselTitle="Film che potrebbero interessarti" class="mb-5"/>
-    <DiscoverCarousel discoverString="tv" carouselTitle="Serie Tv da guardare" class="mb-5"/>
+    <DiscoverCarousel discoverString="tv" carouselTitle="Serie TV da guardare" class="mb-5"/>
 </template>
 
 <style scoped lang="scss">
