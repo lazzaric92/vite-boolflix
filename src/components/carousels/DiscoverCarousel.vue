@@ -123,7 +123,7 @@ export default{
 
                 <div class="carousel">
                     <div class="wrapper">
-                        <article class="border border-light rounded" v-for="(obj, index) in carouselArray" @click="console.log(obj.title)">
+                        <article v-for="(obj, index) in carouselArray" @click="console.log(obj.title)">
                             <SmallerCarouselCard :item="obj" />
                         </article>
                     </div>
@@ -149,7 +149,24 @@ export default{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.1);
+    
+    .slide-arrow{
+        color: white;
+        opacity: .5;
+        font-size: 1.2rem;
+    }
+    
+    &:hover{
+        background-color: rgba(0, 0, 0, 0.8);
+        transition: all .2s ease-in;
+
+        .slide-arrow{
+            opacity: 1;
+            scale: 1.5;
+            transition: all .2s ease-in;
+        }
+    }
 
     &.prev{
         top: 0;
@@ -160,18 +177,6 @@ export default{
     &.next{
         top: 0;
         right: 0;
-    }
-
-    .slide-arrow{
-        color: white;
-        opacity: .5;
-        font-size: 1.2rem;
-    }
-
-    &:hover .slide-arrow{
-        opacity: 1;
-        scale: 1.5;
-        transition: all .2s ease-in;
     }
 }
 
@@ -196,11 +201,10 @@ export default{
     width: calc((100vw - $my_gap * 6) / 6 );
     aspect-ratio: 3/2;
     margin-right: 1rem;
+    cursor: pointer;
+    border-radius: 12px;
 
-
-        .article-img{
-            overflow-x: clip;
-        }
+        
     }
 
     article:first-child{
