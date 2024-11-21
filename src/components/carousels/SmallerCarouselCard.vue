@@ -13,7 +13,8 @@ export default{
 
 <template>
     <div class="sm-c-card h-100 w-100">
-        <img :src="`https://image.tmdb.org/t/p/w342/${item.backdrop_path}`" :alt="(item.media_type === 'movie') ? item.title : item.name">
+        <img v-if="item.backdrop_path == null" src="../../assets/img/mockup-movie-poster.jpeg" :alt="(item.media_type === 'movie') ? item.title : item.name + ' has no poster'" class="w-100">
+        <img v-else :src="`https://image.tmdb.org/t/p/w342/${item.backdrop_path}`" :alt="(item.media_type === 'movie') ? item.title : item.name + ' Poster'">
         <div class="overlay d-flex flex-column-reverse">
             <p class="text-white">{{ item.title }} {{ item.name }}</p>
         </div>
