@@ -1,7 +1,7 @@
 <script>
 import { RouterLink } from 'vue-router';
+import HeaderSearch from './partials/HeaderSearch.vue';
 import { store } from '../store';
-import HeaderSearch from './HeaderSearch.vue';
 
 export default{
     data(){

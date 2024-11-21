@@ -1,7 +1,7 @@
 <script>
-import { store } from "../store.js";
-import SingleCardImage from "./SingleCardImage.vue";
-import SingleCardInfo from "./SingleCardInfo.vue";
+import { store } from "../../store";
+import SingleCardImage from "./card/SingleCardImage.vue";
+import SingleCardInfo from "./card/SingleCardInfo.vue";
 
 export default{
     data(){
@@ -41,7 +41,7 @@ export default{
 </template>
 
 <style scoped lang="scss">
-@use '../styles/partials/variables' as *;
+@use '../../styles/partials/variables' as *;
     article {
         width: calc(100% / 5);
         aspect-ratio: 3/4;

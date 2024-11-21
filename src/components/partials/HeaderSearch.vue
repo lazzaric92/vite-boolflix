@@ -1,13 +1,13 @@
 <script>
 import axios from 'axios';
-import { store } from "../store.js";
 import { RouterLink } from 'vue-router';
-import { router } from '../router.js';
+import { router } from '../../router.js';
+import { store } from '../../store.js';
 
 export default{
     data(){
         return {
-            store,
+            store
         }
     },
     methods: {

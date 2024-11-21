@@ -1,7 +1,7 @@
 import MainHome from './components/pages/MainHome.vue';
 import MainMovies from './components/pages/MainMovies.vue';
 import MainTv from './components/pages/MainTv.vue';
-import MainCardsWrapper from './components/MainCardsWrapper.vue';
+import MainSearchPage from './components/pages/MainSearchPage.vue';
 
 import { createRouter, createWebHistory } from 'vue-router';
 
@@ -26,7 +26,7 @@ const router = createRouter({
         {
             path: '/search',
             name: 'search',
-            component: MainCardsWrapper
+            component: MainSearchPage
         },
     ],
     scrollBehavior(to, from, savedPosition) {

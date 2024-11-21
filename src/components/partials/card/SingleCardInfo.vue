@@ -1,10 +1,11 @@
 <script>
-import { store } from "../store.js";
+import { store } from '../../../store';
+
 
 export default{
     data(){
         return {
-            store,
+            store
         }
     },
     methods: {
@@ -70,8 +71,8 @@ export default{
 </template>
 
 <style scoped lang="scss">
-@use '../../node_modules/@textabledev/langs-flags-list/lang-flags.css';
-@use '../styles/partials/variables' as *;
+@use '../../../../node_modules/@textabledev/langs-flags-list/lang-flags.css';
+@use '../../../styles/partials/variables' as *;
 
     .card-body {
         font-size: .8rem;

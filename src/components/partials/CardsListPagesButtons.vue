@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios';
-import { store } from "../store.js";
+import { store } from "../../store.js";
 
 export default{
     data(){
@@ -119,7 +119,7 @@ export default{
 </template>
 
 <style scoped lang="scss">
-@use '../styles/partials/variables' as *;
+@use '../../styles/partials/variables' as *;
     button {
         color: $my_bg-lightgrey;
         background-color: transparent;

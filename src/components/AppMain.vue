@@ -1,11 +1,6 @@
 <script>
 import axios from 'axios';
 import { store } from "../store.js";
-
-import MainCardsWrapper from './MainCardsWrapper.vue';
-import MainHome from './pages/MainHome.vue';
-import MainMovies from './pages/MainMovies.vue';
-import MainTv from './pages/MainTv.vue';
 import { RouterView } from 'vue-router';
 
 export default{
@@ -16,10 +11,7 @@ export default{
     },
     
     components: {
-        MainCardsWrapper,
-        MainHome,
-        MainMovies,
-        MainTv,
+        
     }
 }
 </script>

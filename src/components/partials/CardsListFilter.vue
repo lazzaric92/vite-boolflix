@@ -1,5 +1,6 @@
 <script>
-import { store } from "../store.js";
+import { store } from '../../store';
+
 
 export default{
     data(){
@@ -42,7 +43,7 @@ export default{
 </template>
 
 <style scoped lang="scss">
-@use '../styles/partials/variables' as *;
+@use '../../styles/partials/variables' as *;
 
     input[type="radio"] {
         opacity: 0;
