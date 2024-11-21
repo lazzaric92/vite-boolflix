@@ -137,14 +137,18 @@ export default{
 
     .slide-arrow-wrapper{
         cursor: pointer;
-        width: 40px;
+        width: 50px;
 
         .slide-arrow{
-            color: transparent;
+            color: white;
+            font-size: 1.5rem;
+            opacity: .3
         }
 
         &:hover .slide-arrow{
-            color: white;
+            opacity: 1;
+            transform: scale(1.2);
+            transition: all .2s ease-in;
         }
     }
 
