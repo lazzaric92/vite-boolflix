@@ -16,6 +16,7 @@ export default{
     props:{
         carouselTitle: String,
         discoverString : String,
+        genreId : Number,
     },
     components: {
         SmallerCarouselCard
@@ -26,6 +27,7 @@ export default{
                 params: {
                 api_key: "861729733fec3d9d72d05bb5c85381e2",
                 language: "it-IT",
+                with_genres: `${this.genreId}`,
                 }
             })
             .then((response) => {

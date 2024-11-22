@@ -1,6 +1,7 @@
 <script>
 import { store } from '../../store';
 import DiscoverCarousel from '../carousels/DiscoverCarousel.vue';
+import GenreCarousel from '../carousels/GenreCarousel.vue';
 import TrendingCarousel from '../carousels/TrendingCarousel.vue';
 
 
@@ -12,7 +13,8 @@ export default{
     },
     components: {
         TrendingCarousel,
-        DiscoverCarousel
+        DiscoverCarousel,
+        GenreCarousel
     },
 }
 </script>
@@ -21,8 +23,12 @@ export default{
     <div class="row h-100">
         <TrendingCarousel trendingString="all"/>
     </div>
-    <DiscoverCarousel discoverString="movie" carouselTitle="Film che potrebbero interessarti" class="mb-5"/>
+    <DiscoverCarousel discoverString="movie" carouselTitle="Film del momento" class="mb-5"/>
     <DiscoverCarousel discoverString="tv" carouselTitle="Serie TV da guardare" class="mb-5"/>
+    <GenreCarousel discoverString="tv" carouselTitle="Serie TV animate" genreId="16" class="mb-5"/>
+    <GenreCarousel discoverString="movie" carouselTitle="Film drammatici" genreId="18" class="mb-5"/>
+    <GenreCarousel discoverString="movie" carouselTitle="Film romantici" genreId="10749" class="mb-5"/>
+    <GenreCarousel discoverString="tv" carouselTitle="Serie TV d'azione" genreId="10759" class="mb-5"/>
 </template>
 
 <style scoped lang="scss">
