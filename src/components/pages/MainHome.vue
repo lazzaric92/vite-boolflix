@@ -32,6 +32,7 @@ export default{
     </div>
     <GenreCarousel discoverString="movie" carouselTitle="Film romantici" genreId="10749" class="mb-5"/>
     <GenreCarousel discoverString="tv" carouselTitle="Serie TV d'azione" genreId="10759" class="mb-5"/>
+    <GenreCarousel discoverString="movie" carouselTitle="Film crime e thriller" genreId="80" class="mb-5"/>
 </template>
 
 <style scoped lang="scss">
