@@ -16,6 +16,8 @@ export default{
     },
     props:{
         trendingString : String,
+        minSlideNumber: String,
+        maxSlideNumber: String,
     },
     components: {
     },
@@ -41,15 +43,13 @@ export default{
             const checkingClock = setInterval(() => {
                 // console.log('START');
                 if(this.trendingArray.length > 0){
-                    let index = 0;
-                    while (index < this.no_slides){
+                    for(let index = Number.parseInt(this.minSlideNumber); index < Number.parseInt(this.maxSlideNumber); index++){
                         this.carouselArray.push(this.trendingArray[index]);
-                        index++;
                     }
+                }
                     clearInterval(checkingClock);
                     // console.log(this.carouselArray);
                     // console.log('STOP');
-                }
             }, 500);
         },
         nextSlide(){
@@ -101,6 +101,7 @@ export default{
             <div class="slide-arrow-wrapper d-flex align-items-center justify-content-center">
                 <font-awesome-icon icon="fa-solid fa-angle-left" @click="prevSlide()" class="slide-arrow"/>
             </div>
+
             <template v-for="(arrayObj, index) in carouselArray">
                 <article v-if="index === this.currentIndex" class="flex-grow-1 d-flex justify-content-between mb-4">
                     <div class="article-info position-relative z-2 w-25 py-4 px-3 d-flex flex-column">
@@ -109,7 +110,7 @@ export default{
                             <h2 class="fs-4 text-secondary" v-if="arrayObj.title != arrayObj.original_title || arrayObj.name != arrayObj.original_name">{{ (arrayObj.media_type === 'movie') ? arrayObj.original_title : arrayObj.original_name }}</h2>
                         </div>
                         <div class="h-25 d-flex flex-column justify-content-center align-items-center">
-                            <p class="text-white mb-4 fs-5"><font-awesome-icon icon="fa-solid fa-tag" class="me-2" /> {{ (arrayObj.media_type === 'movie') ? 'Film' : 'Serie TV' }}</p>
+                            <p v-if="$route.name === 'home'" class="text-white mb-4 fs-5"><font-awesome-icon icon="fa-solid fa-tag" class="me-2" /> {{ (arrayObj.media_type === 'movie') ? 'Film' : 'Serie TV' }}</p>
                             <button class="btn btn-lg">Maggiori informazioni </button>
                         </div>
                     </div>
@@ -119,6 +120,7 @@ export default{
                     </div>
                 </article>
             </template>
+            
             <div class="slide-arrow-wrapper d-flex align-items-center justify-content-center">
                 <font-awesome-icon icon="fa-solid fa-angle-right" @click="nextSlide()" class="slide-arrow"/>
             </div>

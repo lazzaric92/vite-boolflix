@@ -21,12 +21,15 @@ export default{
 
 <template>
     <div class="row h-100">
-        <TrendingCarousel trendingString="all"/>
+        <TrendingCarousel trendingString="all" minSlideNumber="0" maxSlideNumber="5" />
     </div>
     <DiscoverCarousel discoverString="movie" carouselTitle="Film del momento" class="mb-5"/>
     <DiscoverCarousel discoverString="tv" carouselTitle="Serie TV da guardare" class="mb-5"/>
     <GenreCarousel discoverString="tv" carouselTitle="Serie TV animate" genreId="16" class="mb-5"/>
     <GenreCarousel discoverString="movie" carouselTitle="Film drammatici" genreId="18" class="mb-5"/>
+    <div class="row h-100">
+        <TrendingCarousel trendingString="all" minSlideNumber="5" maxSlideNumber="10" />
+    </div>
     <GenreCarousel discoverString="movie" carouselTitle="Film romantici" genreId="10749" class="mb-5"/>
     <GenreCarousel discoverString="tv" carouselTitle="Serie TV d'azione" genreId="10759" class="mb-5"/>
 </template>
