@@ -47,7 +47,7 @@ export default{
                         index++;
                     }
                     clearInterval(checkingClock);
-                    console.log(this.carouselArray);
+                    // console.log(this.carouselArray);
                     this.checkArrows();
                 }
             }, 500);

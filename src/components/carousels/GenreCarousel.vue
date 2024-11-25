@@ -16,7 +16,7 @@ export default{
     props:{
         carouselTitle: String,
         discoverString : String,
-        genreId : Number,
+        genreId : String,
     },
     components: {
         SmallerCarouselCard
@@ -27,7 +27,7 @@ export default{
                 params: {
                 api_key: "861729733fec3d9d72d05bb5c85381e2",
                 language: "it-IT",
-                with_genres: `${this.genreId}`,
+                with_genres: Number.parseInt(this.genreId),
                 }
             })
             .then((response) => {
@@ -49,7 +49,7 @@ export default{
                         index++;
                     }
                     clearInterval(checkingClock);
-                    console.log(this.carouselArray);
+                    // console.log(this.carouselArray);
                     this.checkArrows();
                 }
             }, 500);

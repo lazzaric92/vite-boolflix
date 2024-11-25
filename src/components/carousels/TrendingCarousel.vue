@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import { store } from '../../store';
+import { RouterLink } from 'vue-router';
 
 export default{
     data(){
@@ -102,8 +103,10 @@ export default{
                 <font-awesome-icon icon="fa-solid fa-angle-left" @click="prevSlide()" class="slide-arrow"/>
             </div>
 
+            <!-- article -->
             <template v-for="(arrayObj, index) in carouselArray">
                 <article v-if="index === this.currentIndex" class="flex-grow-1 d-flex justify-content-between mb-4">
+                    <!-- info -->
                     <div class="article-info position-relative z-2 w-25 py-4 px-3 d-flex flex-column">
                         <div class="text-center h-75 d-flex flex-column justify-content-center align-items-center">
                             <h1 class="fs-3 text-white text-center mb-4">{{ (arrayObj.media_type === 'movie') ? arrayObj.title : arrayObj.name }}</h1>
@@ -111,9 +114,12 @@ export default{
                         </div>
                         <div class="h-25 d-flex flex-column justify-content-center align-items-center">
                             <p v-if="$route.name === 'home'" class="text-white mb-4 fs-5"><font-awesome-icon icon="fa-solid fa-tag" class="me-2" /> {{ (arrayObj.media_type === 'movie') ? 'Film' : 'Serie TV' }}</p>
-                            <button class="btn btn-lg">Maggiori informazioni </button>
+                            <RouterLink :to="{ name: 'info', params: {media: arrayObj.media_type, id: arrayObj.id} }">
+                                <button class="btn btn-lg">Maggiori informazioni </button>
+                            </RouterLink>
                         </div>
                     </div>
+                    <!-- image -->
                     <div class="article-img position-relative h-100 w-75 text-end">
                         <div class="dark_overlay position-absolute z-1 w-100 h-100"></div>
                         <img :src="`https://image.tmdb.org/t/p/w1280/${arrayObj.backdrop_path}`" :alt="(arrayObj.media_type === 'movie') ? arrayObj.title : arrayObj.name" class="h-100">
