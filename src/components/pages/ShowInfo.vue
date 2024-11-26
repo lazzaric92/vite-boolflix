@@ -40,13 +40,19 @@ export default{
 
 <template>
     <div class="col-12 h-100">
-        <div class="d-flex">
-            <div class="item-info">
+        <div class="d-flex h-100">
+            <!-- info -->
+            <div class="item-info h-100 d-flex flex-column justify-content-center px-2">
                 <h1 class="text-center">{{ (this.$route.params.media_type === 'movie') ? itemInfo.title : itemInfo.name }}</h1>
+                <h2 class="text-secondary" v-if="itemInfo.title !== itemInfo.original_title || itemInfo.name !== itemInfo.original_name">{{ (this.$route.params.media_type === 'movie') ? itemInfo.title : itemInfo.name }}</h2>
+                
             </div>
-            <div class="item-img">
-                <div class="dark-overlay position-absolute z-1 w-100 h-100"></div>
-                <img :src="`https://image.tmdb.org/t/p/w1280/${itemInfo.backdrop_path}`" :alt="(this.$route.params.media_type === 'movie') ? itemInfo.title : itemInfo.name" >
+
+            <!-- image -->
+            <div class="item-img h-100">
+                <div class="dark_overlay position-absolute z-1 w-100 h-100"></div>
+                <img v-if="itemInfo.backdrop_path == null" src="../../assets/img/mockup-movie-poster.jpeg" :alt="(this.$route.params.media_type === 'movie') ? itemInfo.title : itemInfo.name + ' has no poster'">
+                <img v-else :src="`https://image.tmdb.org/t/p/w1280/${itemInfo.backdrop_path}`" :alt="(this.$route.params.media_type === 'movie') ? itemInfo.title : itemInfo.name" >
             </div>
         </div>
     </div>
@@ -55,6 +61,7 @@ export default{
 <style scoped lang="scss">
 .item-info{
     width: 40%;
+    color: white;
 }
 
 .item-img{
@@ -62,6 +69,7 @@ export default{
     position: relative;
 
     img{
+        height: 100%;
         width: 100%;
         object-fit: cover;
         object-position: center;
@@ -71,7 +79,7 @@ export default{
     .dark_overlay{
         top: 0;
         left: 0;
-        background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,.9) 15%, rgba(0,0,0,0.7) 25%, rgba(255,255,255,0)50%, rgba(0,0,0,0.7) 75%, rgba(0,0,0,1) 100%);
+        background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,.9) 10%, rgba(0,0,0,0.7) 20%, rgba(255,255,255,0)50%, rgba(0,0,0,0.7) 80%, rgba(0,0,0,1) 100%);
     }
 }
 </style>
