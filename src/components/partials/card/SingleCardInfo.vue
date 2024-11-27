@@ -83,7 +83,7 @@ export default{
     }
 
     .lang-icon {
-        background-image: url(../../node_modules/@textabledev/langs-flags-list/lang-flags.png);
+        background-image: url(../../../../node_modules/@textabledev/langs-flags-list/lang-flags.png);
     }
 
     .fa-star{
