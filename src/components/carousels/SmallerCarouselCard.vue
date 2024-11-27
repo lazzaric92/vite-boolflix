@@ -1,4 +1,6 @@
 <script>
+import { RouterLink } from 'vue-router';
+
 export default{
     data(){
         return {
@@ -13,12 +15,21 @@ export default{
 
 <template>
     <div class="sm-c-card h-100 w-100">
+        <router-link :to="{ name: 'info', params: {media: (item.title ? 'movie' : 'tv'), id: item.id} }" >
+            <img v-if="item.backdrop_path == null" src="../../assets/img/mockup-movie-poster.jpeg" :alt="(item.media_type === 'movie') ? item.title : item.name + ' has no poster'" class="w-100">
+            <img v-else :src="`https://image.tmdb.org/t/p/w1280/${item.backdrop_path}`" :alt="(item.media_type === 'movie') ? item.title : item.name + ' Poster'">
+            <div class="overlay d-flex flex-column-reverse">
+                <p class="text-white">{{ (item.media_type === 'movie') ? item.title : item.name }}</p>
+            </div>
+        </router-link>
+    </div>
+    <!-- <div class="sm-c-card h-100 w-100">
         <img v-if="item.backdrop_path == null" src="../../assets/img/mockup-movie-poster.jpeg" :alt="(item.media_type === 'movie') ? item.title : item.name + ' has no poster'" class="w-100">
         <img v-else :src="`https://image.tmdb.org/t/p/w1280/${item.backdrop_path}`" :alt="(item.media_type === 'movie') ? item.title : item.name + ' Poster'">
         <div class="overlay d-flex flex-column-reverse">
-            <p class="text-white">{{ item.title }} {{ item.name }}</p>
+            <p class="text-white">{{ (item.media_type === 'movie') ? item.title : item.name }}</p>
         </div>
-    </div>
+    </div> -->
 </template>
 
 <style scoped lang="scss">

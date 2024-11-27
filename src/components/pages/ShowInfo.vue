@@ -53,7 +53,7 @@ export default{
 </script>
 
 <template>
-    <div class="col-12 h-100">
+    <div class="col-12 h-100 mb-4">
         <div class="d-flex h-100">
             <!-- info -->
             <div class="item-info h-100 d-flex flex-column justify-content-center ps-4 pe-2">
@@ -87,12 +87,12 @@ export default{
                 <!-- genres -->
                 <p class="genres">
                     <span v-for="(genre, index) in itemInfo.genres">
-                        <span class="text-decoration-underline fw-bold">{{ genre.name }}</span>
+                        <span class="text-decoration-underline fw-bold mb-3">{{ genre.name }}</span>
                         <span v-if="index < itemInfo.genres.length - 1" class="mx-2 dot"></span>
                     </span>
                 </p>
 
-                <p>
+                <p class="mb-5">
                 <!-- original language -->
                 <span class="lang-icon me-3" :class="`lang-icon-${itemInfo.original_language}` "></span>
                 
@@ -105,18 +105,15 @@ export default{
                 </p>
 
                 <!-- networks -->
-                <p v-if="itemInfo.networks" class="fs-5 mt-auto">Guarda su</p>
-                <p>
-                    <span v-for="network in itemInfo.networks">{{ network.name }}</span>
-                </p>
-
-                <div class="mt-auto">
-                    <p v-if="itemInfo.homepage">
-                        <a class="text-white fst-italic" :href="itemInfo.homepage">Vai al sito</a>
+                <div>
+                    <p v-if="itemInfo.networks" class="fs-5">Guarda su</p>
+                    <p>
+                        <div v-for="network in itemInfo.networks" class="d-inline-block">
+                            <img v-if="network.logo_path" :src="`https://image.tmdb.org/t/p/w154/${network.logo_path}`" :alt="network.name">
+                            <span v-else>{{ network.name }}</span>
+                        </div>
                     </p>
                 </div>
-                <!-- homepage -->
-
             </div>
 
             <!-- image -->
@@ -127,10 +124,36 @@ export default{
             </div>
         </div>
     </div>
+    <div class="col-12 ps-4 pe-2 add_info">
+        <!-- homepage -->
+        <p v-if="itemInfo.homepage" class="mb-4">
+            <a class="text-white fst-italic" :href="itemInfo.homepage">Vai al sito</a>
+        </p>
+        <p v-if="itemInfo.created_by" class="mb-3">
+            <span>Creato da:</span>
+            <span v-for="author in itemInfo.created_by" class="ms-3 text-secondary">{{ author.name }}</span>
+        </p>
+        <p class="mb-3" v-if="itemInfo.production_companies">
+            <span class="align-middle">Prodotto da:</span>
+            <div v-for="studio in itemInfo.production_companies" class="studio-logo badge rounded-pill d-inline-block p-2 ms-3">
+                <img v-if="studio.logo_path" :src="`https://image.tmdb.org/t/p/w45/${studio.logo_path}`" :alt="studio.name" :title="studio.name">
+                <span v-else class="fw-bold">{{ studio.name }}</span>
+            </div>
+        </p>
+        <p v-if="itemInfo.production_countries" class="mb-5">
+            <span>Paesi:</span>
+            <span v-for="country in itemInfo.production_countries" class="ms-3 text-secondary">{{ country.name }}</span>
+        </p>
+        <div v-if="itemInfo.belongs_to_collection">
+            <p>Questo titolo fa parte della collezione</p>
+            <img :src="`https://image.tmdb.org/t/p/w185/${itemInfo.belongs_to_collection.poster_path}`" :alt="itemInfo.belongs_to_collection.name">
+        </div>
+    </div>
 </template>
 
 <style scoped lang="scss">
 @use '../../../node_modules/@textabledev/langs-flags-list/lang-flags.css';
+@use '../../styles/partials/variables' as *;
 
 .item-info{
     width: 40%;
@@ -166,6 +189,16 @@ export default{
         top: 0;
         left: 0;
         background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,.9) 10%, rgba(0,0,0,0.7) 20%, rgba(255,255,255,0)50%, rgba(0,0,0,0.7) 80%, rgba(0,0,0,1) 100%);
+    }
+}
+
+.add_info{
+    color: white;
+
+    .studio-logo{
+        background-color: rgba(50, 205, 50, .8);
+        color: black;
+        border-radius: 24px;
     }
 }
 </style>
