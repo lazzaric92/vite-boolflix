@@ -60,6 +60,8 @@ export default{
 
         .navbar-brand {
             color: $my_logo-color;
+            font-family: cursive;
+            font-size: 1.4rem;
         }
 
         li.page_active{

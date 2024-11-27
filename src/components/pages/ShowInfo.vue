@@ -105,11 +105,11 @@ export default{
                 </p>
 
                 <!-- networks -->
-                <div>
-                    <p v-if="itemInfo.networks" class="fs-5">Guarda su</p>
+                <div v-if="itemInfo.networks">
+                    <p class="fs-5">Guarda su</p>
                     <p>
-                        <div v-for="network in itemInfo.networks" class="d-inline-block">
-                            <img v-if="network.logo_path" :src="`https://image.tmdb.org/t/p/w154/${network.logo_path}`" :alt="network.name">
+                        <div v-for="network in itemInfo.networks" class="d-inline-block" :title="network.name">
+                            <img v-if="network.logo_path" :src="`https://image.tmdb.org/t/p/w154/${network.logo_path}`" :alt="network.name" >
                             <span v-else>{{ network.name }}</span>
                         </div>
                     </p>
@@ -135,8 +135,8 @@ export default{
         </p>
         <p class="mb-3" v-if="itemInfo.production_companies">
             <span class="align-middle">Prodotto da:</span>
-            <div v-for="studio in itemInfo.production_companies" class="studio-logo badge rounded-pill d-inline-block p-2 ms-3">
-                <img v-if="studio.logo_path" :src="`https://image.tmdb.org/t/p/w45/${studio.logo_path}`" :alt="studio.name" :title="studio.name">
+            <div v-for="studio in itemInfo.production_companies" class="studio-logo badge rounded-pill d-inline-block p-2 ms-3" :title="studio.name">
+                <img v-if="studio.logo_path" :src="`https://image.tmdb.org/t/p/w45/${studio.logo_path}`" :alt="studio.name">
                 <span v-else class="fw-bold">{{ studio.name }}</span>
             </div>
         </p>

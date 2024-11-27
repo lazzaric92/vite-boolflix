@@ -99,6 +99,8 @@ export default{
 </template>
 
 <style scoped lang="scss">
+@use '../../styles/partials/variables' as *;
+
     div.col-10 div{
         background-color: #212529;
 
@@ -114,6 +116,7 @@ export default{
 
         #search-input {
             width: 95%;
+            caret-color: $my_logo-color;
         }
     }
 </style>
