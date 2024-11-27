@@ -122,7 +122,7 @@ export default{
                     <!-- image -->
                     <div class="article-img position-relative h-100 w-75 text-end">
                         <div class="dark_overlay position-absolute z-1 w-100 h-100"></div>
-                        <img :src="`https://image.tmdb.org/t/p/w1280/${arrayObj.backdrop_path}`" :alt="(arrayObj.media_type === 'movie') ? arrayObj.title : arrayObj.name" class="h-100">
+                        <img :src="`https://image.tmdb.org/t/p/w1280/${arrayObj.backdrop_path}`" :alt="(arrayObj.media_type === 'movie') ? arrayObj.title : arrayObj.name" class="h-100 w-100 ">
                     </div>
                 </article>
             </template>
@@ -185,12 +185,19 @@ export default{
 
         .dark_overlay{
             background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,.9) 15%, rgba(0,0,0,0.7) 25%, rgba(255,255,255,0)50%, rgba(0,0,0,0.7) 75%, rgba(0,0,0,1) 100%);
+            
         }
 
         .article-img{
             object-fit: cover;
             object-position: center;
             overflow-x: clip;
+            box-shadow: 20px 0px 30px 20px rgb(0,0,0,) inset;
+            
+            img{
+                object-fit: cover;
+                object-position: center;
+            }
         }
     }
 

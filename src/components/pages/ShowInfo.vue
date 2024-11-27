@@ -27,6 +27,10 @@ export default{
                 //
             }); 
         },
+        getYear(date){
+            const dateArray = date.split('-');
+            return dateArray[0];
+        },
         printInfo(){
             // console.log(this.$route.params.id, this.$route.params.media);
         },
@@ -42,10 +46,26 @@ export default{
     <div class="col-12 h-100">
         <div class="d-flex h-100">
             <!-- info -->
-            <div class="item-info h-100 d-flex flex-column justify-content-center px-2">
-                <h1 class="text-center">{{ (this.$route.params.media_type === 'movie') ? itemInfo.title : itemInfo.name }}</h1>
-                <h2 class="text-secondary" v-if="itemInfo.title !== itemInfo.original_title || itemInfo.name !== itemInfo.original_name">{{ (this.$route.params.media_type === 'movie') ? itemInfo.title : itemInfo.name }}</h2>
-                
+            <div class="item-info h-100 d-flex flex-column justify-content-center ps-4 pe-2">
+                <h1 class="mb-3 ps-2">{{(this.$route.params.media === 'movie') ? itemInfo.title : itemInfo.name }}</h1>
+                <h2 class="text-secondary ps-2 " v-if="itemInfo.title !== itemInfo.original_title || itemInfo.name !== itemInfo.original_name">{{ (this.$route.params.media_type === 'movie') ? itemInfo.title : itemInfo.name }}</h2>
+                <p v-if="itemInfo.tagline" class="fst-italic ps-2">{{ itemInfo.tagline }}</p>
+                <p class="mb-3">{{ itemInfo.overview }}</p>
+                <p v-if="this.$route.params.media === 'movie'">
+                    <span class="me-2">{{ getYear(itemInfo.release_date) }}</span>
+                    <span>{{ itemInfo.runtime }} min</span>
+                </p>
+                <p v-else>
+                    <span class="me-2">{{ getYear(itemInfo.first_air_date) }}</span>
+                    <span class="me-2">-</span>
+                    <span v-if="itemInfo.in_production === 1 || itemInfo.status === 'Returning Series'" class="me-2">in produzione</span>
+                    <span v-if="itemInfo.status === 'Ended'" class="me-2">conclusa</span>
+                    <span v-if="itemInfo.status === 'Canceled'" class="me-2">cancellata</span>
+                    <span class="me-2">{{ itemInfo.number_of_seasons }} {{ (itemInfo.number_of_seasons === 1) ? 'stagione' : 'stagioni' }}</span>
+                    <span class="me-2">{{ itemInfo.number_of_episodes }} episodi</span>
+                    <span v-if="itemInfo.episode_run_time.length === 1" class="me-2">{{ itemInfo.episode_run_time[0] }} min</span>
+                </p>
+
             </div>
 
             <!-- image -->
