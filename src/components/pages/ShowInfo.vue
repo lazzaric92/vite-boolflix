@@ -127,34 +127,34 @@ export default{
         </p>
 
         <!-- # networks -->
-        <div v-if="itemInfo.networks.length > 0" class="networks mb-5">
-            <p class="fs-5">Guarda su:</p>
-            <span v-for="(network, index) in itemInfo.networks" :title="network.name">
+        <div v-if="itemInfo.networks" class="networks mb-5">
+            <p class="fs-5" v-if="itemInfo.networks.length > 0">Guarda su:</p>
+            <!-- <span v-for="(network, index) in itemInfo.networks" :title="network.name">
                 <span class="network-name fw-bold">{{ network.name }}</span>
                 <span v-if="index < itemInfo.networks.length - 1" class="dot mx-3"></span>
-            </span>
-            <!-- <div class="networks mb-3">
+            </span> -->
+            <div class="networks mb-3">
                 <div v-for="network in itemInfo.networks" class="d-inline-block mx-2" :title="network.name">
                     <img v-if="network.logo_path" :src="`https://image.tmdb.org/t/p/w154/${network.logo_path}`" :alt="network.name" >
                     <span v-else>{{ network.name }}</span>
                 </div>
-            </div> -->
+            </div>
         </div>
 
         <!-- # production -->
-        <p v-if="itemInfo.created_by.length > 0" class="mb-3">
+        <p v-if="itemInfo.created_by" class="mb-3">
             <span>Creato da:</span>
             <span v-for="author in itemInfo.created_by" class="ms-3 text-secondary">{{ author.name }}</span>
         </p>
         <p class="mb-3" v-if="itemInfo.production_companies.length > 0">
-            <span class="me-3">Prodotto da:</span>
+            <span class="me-3" v-if="itemInfo.created_by.length > 0">Prodotto da:</span>
             <span v-for="(studio, index) in itemInfo.production_companies" :title="studio.name">
                 <span class="fw-bold text-secondary">{{ studio.name }}</span>
                 <span v-if="index < itemInfo.production_companies.length - 1" class="dot mx-2 text-secondary"></span>
             </span>
         </p>
-        <p v-if="itemInfo.production_countries.length > 0" class="mb-5">
-            <span>Paesi:</span>
+        <p v-if="itemInfo.production_countries" class="mb-5">
+            <span v-if="itemInfo.production_countries.length > 0">Paesi:</span>
             <span v-for="country in itemInfo.production_countries" class="ms-3 text-secondary">{{ country.name }}</span>
         </p>
 
@@ -211,13 +211,13 @@ span.dot::after{
 }
 
 .networks{
-    // max-height: 100px;
-    // overflow-y: scroll;
-
-    .network-name{
-        // color: rgba(50, 205, 50, .8);
-        font-size: 1.1rem;
+    img{
+        filter: brightness(75%) drop-shadow(8px 8px 20px rgba(128, 128, 128, 0.7))
     }
+
+    // .network-name{
+    //     font-size: 1.1rem;
+    // }
 }
 </style>
 
