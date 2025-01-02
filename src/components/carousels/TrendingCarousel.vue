@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { store } from '../../store';
 import { RouterLink } from 'vue-router';
+import AppLoader from '../partials/AppLoader.vue';
 
 export default{
     data(){
@@ -13,6 +14,7 @@ export default{
             currentIndex: 0,
             carouselClock: null,
             isClockActive: false,
+            isLoading: false,
         }
     },
     props:{
@@ -21,6 +23,7 @@ export default{
         maxSlideNumber: String,
     },
     components: {
+        AppLoader
     },
     methods: {
         getTrendingList: function(){
@@ -37,6 +40,9 @@ export default{
             })
             .catch((error) => {
                 console.log(error);
+            })
+            .finally(() => {
+                this.isLoading = false;
             }); 
         },
         getCarouselElements(){
@@ -92,12 +98,13 @@ export default{
     created(){
         this.getCarouselElements();
         this.startCarouselClock();
+        this.isLoading = true;
     }
 }
 </script>
 
 <template>
-    <div class="col-12">
+    <div v-if="isLoading === false" class="col-12">
         <div class="d-flex">
             <div class="slide-arrow-wrapper d-flex align-items-center justify-content-center">
                 <font-awesome-icon icon="fa-solid fa-angle-left" @click="prevSlide()" class="slide-arrow"/>
@@ -141,6 +148,9 @@ export default{
                 </div>
             </template>
         </div>
+    </div>
+    <div v-else class="col-12">
+        <AppLoader />
     </div>
 </template>
 
