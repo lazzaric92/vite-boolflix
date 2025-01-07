@@ -36,8 +36,8 @@ const router = createRouter({
             component: ShowInfo
         },
         {
-            path: '/404-not-found',
-            name: '404',
+            path: '/404',
+            name: 'not-found',
             component: NotFound
         },
     ],
