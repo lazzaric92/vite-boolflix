@@ -54,7 +54,7 @@ export default{
                 // console.log(this.store.tvSeriesListPages);
                 // console.log(this.store.totalPages);
             })
-            .catch(function (error) {
+            .catch((error) => {
                 console.log(error);
             }); 
         },
