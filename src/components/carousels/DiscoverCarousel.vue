@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import SmallerCarouselCard from './SmallerCarouselCard.vue';
+import AppLoader from '../partials/AppLoader.vue';
 
 export default{
     data(){
@@ -10,7 +11,8 @@ export default{
             tot_slides: 20,
             no_articles: 5,
             gap: 12,
-            counterMax: null, // number of clicks to reach the end of the carousel
+            counterMax: null, // number of clicks to reach the end of the carousel,
+            isLoading: false,
         }
     },
     props:{
@@ -18,7 +20,8 @@ export default{
         discoverString : String,
     },
     components: {
-        SmallerCarouselCard
+        SmallerCarouselCard,
+        AppLoader
     },
     methods: {
         getDiscoverList: function(){
@@ -35,6 +38,9 @@ export default{
             })
             .catch((error) => {
                 console.log(error);
+            })
+            .finally(() => {
+                this.isLoading = false;
             });            
         },
         getCarouselElements(){
@@ -121,13 +127,14 @@ export default{
     created(){
         this.getCarouselElements();
         this.getCounterMax();
+        this.isLoading = true;
     }
 }
 
 </script>
 
 <template>
-    <div class="row">
+    <div v-if="isLoading === false" class="row">
         <div class="col-12 mb-3">
             <h3 class="fs-4 text-white ms-3">{{ carouselTitle }}</h3>
         </div>
@@ -149,6 +156,11 @@ export default{
                     <font-awesome-icon icon="fa-solid fa-angle-right" class="slide-arrow" />
                 </div>
             </div>
+        </div>
+    </div>
+    <div v-else class="row">
+        <div class="col-12">
+            <AppLoader />
         </div>
     </div>
 </template>

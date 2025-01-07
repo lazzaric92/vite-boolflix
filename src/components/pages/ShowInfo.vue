@@ -1,11 +1,16 @@
 <script>
 import axios from 'axios';
+import AppLoader from '../partials/AppLoader.vue';
 
 export default{
     data(){
         return {
             itemInfo: [],
+            isLoading: false,
         }
+    },
+    components: {
+        AppLoader
     },
     methods: {
         getInfo(){
@@ -23,8 +28,8 @@ export default{
             .catch((error) => {
                 console.log(error);
             })
-            .finally(function(){
-                //
+            .finally(() => {
+                this.isLoading = false;
             }); 
         },
         getYear(date){
@@ -48,12 +53,13 @@ export default{
     created(){
         this.printInfo();
         this.getInfo();
+        this.isLoading = true;
     }
 }
 </script>
 
 <template>
-    <div class="col-12 h-100 mb-4">
+    <div v-if="isLoading === false" class="col-12 h-100 mb-4">
         <div class="d-flex h-100">
             <!-- || info -->
             <div class="item-info h-100 d-flex flex-column justify-content-center ps-4 pe-2">
@@ -120,9 +126,9 @@ export default{
             </div>
         </div>
     </div>
-    <div class="col-12 ps-4 pe-2 add_info">
+    <div v-if="isLoading === false" class="col-12 ps-4 pe-2 add_info">
         <!-- # homepage -->
-        <p v-if="itemInfo.homepage != undefined" class="mb-4">
+        <p v-if="itemInfo.homepage != undefined && itemInfo.homepage != ''" class="mb-4">
             <a class="text-white fst-italic" :href="itemInfo.homepage">Vai al sito</a>
         </p>
 
@@ -163,6 +169,9 @@ export default{
             <p>Questo titolo fa parte della collezione</p>
             <img :src="`https://image.tmdb.org/t/p/w185/${itemInfo.belongs_to_collection.poster_path}`" :alt="itemInfo.belongs_to_collection.name">
         </div>
+    </div>
+    <div v-if="isLoading === true" class="col-12 h-100">
+        <AppLoader />
     </div>
 </template>
 
