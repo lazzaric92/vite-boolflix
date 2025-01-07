@@ -3,6 +3,7 @@ import MainMovies from './components/pages/MainMovies.vue';
 import MainTv from './components/pages/MainTv.vue';
 import MainSearchPage from './components/pages/MainSearchPage.vue';
 import ShowInfo from './components/pages/ShowInfo.vue';
+import NotFound from './components/pages/404NotFound.vue';
 
 import { createRouter, createWebHistory } from 'vue-router';
 
@@ -33,6 +34,11 @@ const router = createRouter({
             path: '/info/:media/:id',
             name: 'info',
             component: ShowInfo
+        },
+        {
+            path: '/404-not-found',
+            name: '404',
+            component: NotFound
         },
     ],
     scrollBehavior(to, from, savedPosition) {
