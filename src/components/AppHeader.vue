@@ -24,7 +24,7 @@ export default{
     <header class="fixed-top">
         <nav class="navbar border-bottom border-bottom-0" data-bs-theme="dark">
             <div class="container-fluid">
-                <a href="#" class="navbar-brand fw-bold">Boolflix</a>
+                <router-link to="/" class="navbar-brand fw-bold">Boolflix</router-link>
                 <ul class="navbar-nav flex-row fw-bold">
                     <li class="nav-item px-lg-2" :class="$route.name === 'home' ? 'page_active' : ''">
                         <router-link class="nav-link" to="/">Home</router-link>

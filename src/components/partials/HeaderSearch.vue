@@ -24,11 +24,11 @@ export default{
                 // lista film
                 this.store.moviesList = response.data.results;
                 // console.log(this.store.moviesList);
+                console.log(response.data);
                 this.store.resultsList = [...this.store.resultsList, ...this.store.moviesList];
                 // pagine
                 this.store.moviesListPages = response.data.total_pages;
-                this.store.totalPages = this.store.totalPages + this.store.moviesListPages;
-                // console.log(this.store.moviesListPages);
+                console.log(this.store.moviesListPages);
             })
             .catch(function (error) {
                 console.log(error);
@@ -47,16 +47,23 @@ export default{
                 // serie tv
                 this.store.tvSeriesList = response.data.results;
                 // console.log(this.store.tvSeriesList);
+                console.log(response.data);
                 this.store.resultsList = [...this.store.resultsList, ...this.store.tvSeriesList];
                 // pagine
                 this.store.tvSeriesListPages = response.data.total_pages;
-                this.store.totalPages = this.store.totalPages + this.store.tvSeriesListPages;
-                // console.log(this.store.tvSeriesListPages);
-                // console.log(this.store.totalPages);
+                console.log(this.store.tvSeriesListPages);
+                console.log(this.store.totalPages);
             })
             .catch((error) => {
                 console.log(error);
             }); 
+        },
+        getTotalPages(){
+            if(this.store.moviesListPages >= this.store.tvSeriesListPages){
+                this.store.totalPages = this.store.moviesListPages;
+            } else {
+                this.store.totalPages = this.store.tvSeriesListPages;
+            }
         },
         getSearchResults: function(){
             if(this.store.searchedString !== ""){
@@ -65,6 +72,7 @@ export default{
                 this.store.totalPages = 0;
                 this.getMoviesList();
                 this.getTVSeriesList();
+                this.getTotalPages();
             }
         },
         clearSearchInput: function(){
