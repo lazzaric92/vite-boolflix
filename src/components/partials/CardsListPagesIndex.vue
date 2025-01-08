@@ -110,25 +110,38 @@ export default{
 </script>
 
 <template>
-    <div class="d-flex justify-content-between align-itms-center mt-auto">
-        <button>
-            <font-awesome-icon icon="fa-solid fa-circle-arrow-left" @click="prevPage()"/>
-            <!-- <font-awesome-icon icon="fa-solid fa-angle-left" @click="prevPage()"/> -->
-        </button>
-
-        <button>
-            <font-awesome-icon icon="fa-solid fa-circle-arrow-right" @click="nextPage()" />
-            <!-- <font-awesome-icon icon="fa-solid fa-angle-right" @click="nextPage()"/> -->
-        </button>
+    <div class="d-flex justify-content-center align-items-center mt-3">
+        <span>
+            <font-awesome-icon icon="fa-solid fa-angles-left" />
+        </span>
+        <span>
+            <font-awesome-icon icon="fa-solid fa-angle-left" />
+        </span>
+        <template v-for="page in this.store.totalPages">
+            <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage">{{ page }}</span>
+            <span v-if="page === this.store.currentPage">{{ page }}</span>
+            <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)">{{ page }}</span>
+        </template>
+        <span>
+            <font-awesome-icon icon="fa-solid fa-angle-right" />
+        </span>
+        <span>
+            <font-awesome-icon icon="fa-solid fa-angles-right" />
+        </span>
     </div>
 </template>
 
 <style scoped lang="scss">
 @use '../../styles/partials/variables' as *;
-    button {
-        color: $my_bg-lightgrey;
-        background-color: transparent;
-        border: none;
-        font-size: 1.3rem;
+    // button {
+    //     color: $my_bg-lightgrey;
+    //     background-color: transparent;
+    //     border: none;
+    //     font-size: 1.3rem;
+    // }
+
+    span{
+        margin: 0 .5rem;
+        color: white;
     }
 </style>
