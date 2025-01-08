@@ -1,5 +1,6 @@
 <script>
 import { store } from '../../store';
+import { router } from '../../router';
 import CardsList from '../partials/CardsList.vue';
 
 export default{
@@ -8,9 +9,14 @@ export default{
             store
         }
     },
-    
     components: {
         CardsList
+    },
+    created(){
+        // after refreshing, search input and the page are blank -> redirection to home page
+        if(this.store.searchedString === ''){
+            this.$router.push({name: 'home'});
+        }
     }
 }
 </script>
