@@ -85,7 +85,7 @@ export default{
             <div class="row" v-if="(this.store.radioValue === 'movies')">
                 <CardsListSingleCard v-for="(result, id) in this.store.moviesList" :key="result.id" :singleCard = "result"/>
             </div>
-            <div class="row" v-else-if="(this.store.radioValue === 'series')">
+            <div class="row" v-else-if="(this.store.radioValue === 'tv')">
                 <CardsListSingleCard v-for="(result, id) in this.store.tvSeriesList" :key="result.id" :singleCard = "result"/>
             </div>
             <div class="row" v-else>

@@ -117,11 +117,30 @@ export default{
         <span>
             <font-awesome-icon icon="fa-solid fa-angle-left" />
         </span>
-        <template v-for="page in this.store.totalPages">
-            <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage">{{ page }}</span>
-            <span v-if="page === this.store.currentPage">{{ page }}</span>
-            <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)">{{ page }}</span>
-        </template>
+        <!-- # movies -->
+        <span v-if="this.store.radioValue === 'movies'">
+            <template v-for="page in this.store.moviesListPages">
+                <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage">{{ page }}</span>
+                <span v-if="page === this.store.currentPage">{{ page }}</span>
+                <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)">{{ page }}</span>
+            </template>
+        </span>
+        <!-- # tv series -->
+        <span v-else-if="this.store.radioValue === 'tv'">
+            <template v-for="page in this.store.tvSeriesListPages">
+                <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage">{{ page }}</span>
+                <span v-if="page === this.store.currentPage">{{ page }}</span>
+                <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)">{{ page }}</span>
+            </template>
+        </span>
+        <!-- # all -->
+        <span v-else>
+            <template v-for="page in this.store.totalPages">
+                <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage">{{ page }}</span>
+                <span v-if="page === this.store.currentPage">{{ page }}</span>
+                <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)">{{ page }}</span>
+            </template>
+        </span>
         <span>
             <font-awesome-icon icon="fa-solid fa-angle-right" />
         </span>
@@ -143,5 +162,6 @@ export default{
     span{
         margin: 0 .5rem;
         color: white;
+        cursor: pointer;
     }
 </style>

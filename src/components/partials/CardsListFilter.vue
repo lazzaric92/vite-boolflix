@@ -10,17 +10,17 @@ export default{
                 {
                     'id': 0,
                     'val': 'all',
-                    'label': 'All'
+                    'label': 'Tutti'
                 },
                 {
                     'id': 1,
                     'val': 'movies',
-                    'label': 'Movies'
+                    'label': 'Film'
                 },
                 {
                     'id': 2,
-                    'val': 'series',
-                    'label': 'TV Series'
+                    'val': 'tv',
+                    'label': 'Serie TV'
                 },
             ]
         }

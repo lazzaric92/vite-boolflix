@@ -11,7 +11,7 @@ export const store = reactive({
     currentPage: 1,
     moviesListPages: 0,
     tvSeriesListPages: 0,
-    totalPages: 0,
+    totalPages: null,
     radioValue: 'all',
 
     tvGenres: [

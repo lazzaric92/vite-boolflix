@@ -28,7 +28,7 @@ export default{
                 this.store.resultsList = [...this.store.resultsList, ...this.store.moviesList];
                 // pagine
                 this.store.moviesListPages = response.data.total_pages;
-                console.log(this.store.moviesListPages);
+                // console.log(this.store.moviesListPages);
             })
             .catch((error) => {
                 console.log(error);
@@ -56,7 +56,7 @@ export default{
                 // pagine
                 this.store.tvSeriesListPages = response.data.total_pages;
                 console.log(this.store.tvSeriesListPages);
-                console.log(this.store.totalPages);
+                // console.log(this.store.totalPages);
             })
             .catch((error) => {
                 console.log(error);
@@ -77,10 +77,13 @@ export default{
             if(this.store.searchedString !== ""){
                 this.store.resultsList = [];
                 this.currentPage = 1;
-                this.store.totalPages = 0;
+                // this.store.totalPages = 0;
                 this.getMoviesList();
                 this.getTVSeriesList();
-                this.getTotalPages();
+                setTimeout(() => {
+                    this.getTotalPages();
+                    console.log(this.store.totalPages);
+                }, 100);
             }
         },
         clearSearchInput: function(){
