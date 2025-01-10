@@ -83,7 +83,7 @@ export default{
                 setTimeout(() => {
                     this.getTotalPages();
                     console.log(this.store.totalPages);
-                }, 100);
+                }, 200);
             }
         },
         clearSearchInput: function(){

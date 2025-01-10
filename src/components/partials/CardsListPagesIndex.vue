@@ -110,41 +110,48 @@ export default{
 </script>
 
 <template>
-    <div class="d-flex justify-content-center align-items-center mt-3">
-        <span>
+    <div class="d-flex justify-content-center align-items-center mt-3 pb-3">
+        <span >
             <font-awesome-icon icon="fa-solid fa-angles-left" />
         </span>
-        <span>
+        <span class="me-4">
             <font-awesome-icon icon="fa-solid fa-angle-left" />
         </span>
+
+        <span v-if="this.store.currentPage > 4">...</span>
+
         <!-- # movies -->
-        <span v-if="this.store.radioValue === 'movies'">
+        <div v-if="this.store.radioValue === 'movies'">
             <template v-for="page in this.store.moviesListPages">
                 <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage">{{ page }}</span>
-                <span v-if="page === this.store.currentPage">{{ page }}</span>
+                <span v-if="page === this.store.currentPage" class="active-page">{{ page }}</span>
                 <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)">{{ page }}</span>
             </template>
-        </span>
+            <span v-if="this.store.currentPage >= (this.store.moviesListPages - 4)">...</span>
+        </div>
         <!-- # tv series -->
-        <span v-else-if="this.store.radioValue === 'tv'">
+        <div v-else-if="this.store.radioValue === 'tv'">
             <template v-for="page in this.store.tvSeriesListPages">
                 <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage">{{ page }}</span>
-                <span v-if="page === this.store.currentPage">{{ page }}</span>
+                <span v-if="page === this.store.currentPage" class="active-page">{{ page }}</span>
                 <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)">{{ page }}</span>
             </template>
-        </span>
+            <span v-if="this.store.currentPage >= (this.store.tvSeriesListPages - 4)">...</span>
+        </div>
         <!-- # all -->
-        <span v-else>
+        <div v-else>
             <template v-for="page in this.store.totalPages">
                 <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage">{{ page }}</span>
-                <span v-if="page === this.store.currentPage">{{ page }}</span>
+                <span v-if="page === this.store.currentPage" class="active-page">{{ page }}</span>
                 <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)">{{ page }}</span>
             </template>
-        </span>
-        <span>
+            <span v-if="this.store.currentPage >= (this.store.totalPage - 4)">...</span>
+        </div>
+
+        <span class="ms-4">
             <font-awesome-icon icon="fa-solid fa-angle-right" />
         </span>
-        <span>
+        <span >
             <font-awesome-icon icon="fa-solid fa-angles-right" />
         </span>
     </div>
@@ -161,7 +168,17 @@ export default{
 
     span{
         margin: 0 .5rem;
-        color: white;
         cursor: pointer;
+        color: $my_bg-lightgrey;
+        font-size: 1.1rem;
+        
+        &:hover{
+            color: white;
+            scale: 1.1;
+        }
+
+        &.active-page{
+            color: $my_logo-color;
+        }
     }
 </style>

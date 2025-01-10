@@ -23,8 +23,8 @@ export default{
     <div class="row h-100">
         <TrendingCarousel trendingString="tv" minSlideNumber="0" maxSlideNumber="5" />
     </div>
-    <DiscoverCarousel discoverString="tv" carouselTitle="I film più popolari" class="mb-5"/>
-    <GenreCarousel discoverString="tv" carouselTitle="Serie animate" genreId="16" class="mb-5"/>
+    <DiscoverCarousel discoverString="tv" carouselTitle="Le serie più popolari" class="mb-5"/>
+    <GenreCarousel discoverString="tv" carouselTitle="Animazione" genreId="16" class="mb-5"/>
     <GenreCarousel discoverString="tv" carouselTitle="Crime" genreId="80" class="mb-5"/>
     <GenreCarousel discoverString="tv" carouselTitle="Serie drammatiche" genreId="18" class="mb-5"/>
     <div class="row h-100">
@@ -34,7 +34,7 @@ export default{
     <GenreCarousel discoverString="tv" carouselTitle="Serie sci-fi e fantasy" genreId="10765" class="mb-5"/>
     <GenreCarousel discoverString="tv" carouselTitle="Serie per tutta la famiglia" genreId="10751" class="mb-5"/>
     <GenreCarousel discoverString="tv" carouselTitle="Serie per i più piccoli" genreId="10762" class="mb-5"/>
-    <GenreCarousel discoverString="tv" carouselTitle="Serie documentario" genreId="99" class="mb-5"/>
+    <GenreCarousel discoverString="tv" carouselTitle="Docu-serie" genreId="99" class="mb-5"/>
 </template>
 
 <style scoped lang="scss">
