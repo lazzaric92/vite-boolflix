@@ -28,7 +28,7 @@ export default{
                 this.store.resultsList = [...this.store.resultsList, ...this.store.moviesList];
                 // pagine
                 this.store.moviesListPages = response.data.total_pages;
-                // console.log(this.store.moviesListPages);
+                console.log(this.store.moviesListPages);
             })
             .catch((error) => {
                 console.log(error);
@@ -63,7 +63,11 @@ export default{
                 this.$route.push({name: 'not-found'});
             })
             .finally(() => {
-                this.store.searchLoading = false;
+                if(this.store.searchLoading === true){
+                    setTimeout(() => {
+                        this.store.searchLoading = false;
+                    }, 2000);
+                }
             });  
         },
         getTotalPages(){
@@ -82,7 +86,7 @@ export default{
                 this.getTVSeriesList();
                 setTimeout(() => {
                     this.getTotalPages();
-                    console.log(this.store.totalPages);
+                    // console.log(this.store.totalPages);
                 }, 200);
             }
         },

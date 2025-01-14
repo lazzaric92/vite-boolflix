@@ -54,7 +54,7 @@ export default{
     label {
         display: inline-block;
         background-color: transparent;
-        font-size: .8rem;
+        font-size: .9rem;
         border: 2px solid $my_bg-lightgrey;
         border-radius: 32px;
         cursor: pointer;

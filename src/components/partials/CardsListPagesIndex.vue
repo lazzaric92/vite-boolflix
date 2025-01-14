@@ -6,7 +6,7 @@ import { store } from '../../store';
 export default{
     data(){
         return {
-            store
+            store,
         }
     },
     methods: {
@@ -53,59 +53,10 @@ export default{
                 this.updateTVSeriesList();
             }
         },
-        // nextPage: function(){
-        //     let pages;
-        //     switch (this.store.radioValue){
-        //         case 'movies':
-        //             pages = this.store.moviesListPages;
-        //             break;
-        //         case 'series':
-        //             pages = this.store.tvSeriesListPages;
-        //             break;
-        //         case 'all':
-        //             pages = this.store.totalPages -1;
-        //             break;
-        //         default:
-        //             pages = this.store.totalPages;
-        //     }
-
-        //     if(this.store.currentPage < pages){
-        //         this.store.currentPage++;
-        //         this.updateSearchResults();
-        //     } else {
-        //         this.store.currentPage = pages;
-        //         this.updateSearchResults();
-        //     }
-        //     console.log(this.store.currentPage, pages);
-        // },
-        // prevPage: function(){
-        //     let pages;
-        //     switch (this.store.radioValue){
-        //         case 'movies':
-        //             pages = this.store.moviesListPages;
-        //             break;
-        //         case 'series':
-        //             pages = this.store.tvSeriesListPages;
-        //             break;
-        //         case 'all':
-        //             pages = this.store.totalPages -1;
-        //             break;
-        //         default:
-        //             pages = this.store.totalPages;
-        //     }
-        //     if(this.store.currentPage > 1 && this.store.currentPage <= pages){
-        //         this.store.currentPage--;
-        //         this.updateSearchResults();
-        //     } else {
-        //         this.store.currentPage = 1
-        //         this.updateSearchResults();
-        //     }
-        //     console.log(this.store.currentPage, pages);
-        // }
+        setCurrentPage(page){
+            this.store.currentPage = page;
+        }
     },
-    created(){
-        
-    }
 }
 </script>
 
@@ -123,29 +74,29 @@ export default{
         <!-- # movies -->
         <div v-if="this.store.radioValue === 'movies'">
             <template v-for="page in this.store.moviesListPages">
-                <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage">{{ page }}</span>
-                <span v-if="page === this.store.currentPage" class="active-page">{{ page }}</span>
-                <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)">{{ page }}</span>
+                <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage" @click="setCurrentPage(page)">{{ page }}</span>
+                <span v-if="page === this.store.currentPage" class="active-page" >{{ page }}</span>
+                <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)" @click="setCurrentPage(page)">{{ page }}</span>
             </template>
-            <span v-if="this.store.currentPage >= (this.store.moviesListPages - 4)">...</span>
+            <span v-if="this.store.currentPage < (this.store.moviesListPages - 4)">...</span>
         </div>
         <!-- # tv series -->
         <div v-else-if="this.store.radioValue === 'tv'">
             <template v-for="page in this.store.tvSeriesListPages">
-                <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage">{{ page }}</span>
-                <span v-if="page === this.store.currentPage" class="active-page">{{ page }}</span>
-                <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)">{{ page }}</span>
+                <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage" @click="setCurrentPage(page)">{{ page }}</span>
+                <span v-if="page === this.store.currentPage" class="active-page" >{{ page }}</span>
+                <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)" @click="setCurrentPage(page)">{{ page }}</span>
             </template>
-            <span v-if="this.store.currentPage >= (this.store.tvSeriesListPages - 4)">...</span>
+            <span v-if="this.store.currentPage < (this.store.tvSeriesListPages - 4)">...</span>
         </div>
         <!-- # all -->
         <div v-else>
             <template v-for="page in this.store.totalPages">
-                <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage">{{ page }}</span>
-                <span v-if="page === this.store.currentPage" class="active-page">{{ page }}</span>
-                <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)">{{ page }}</span>
+                <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage" @click="setCurrentPage(page)">{{ page }}</span>
+                <span v-if="page === this.store.currentPage" class="active-page" >{{ page }}</span>
+                <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)" @click="setCurrentPage(page)">{{ page }}</span>
             </template>
-            <span v-if="this.store.currentPage >= (this.store.totalPage - 4)">...</span>
+            <span v-if="this.store.currentPage < (this.store.totalPage - 4)">...</span>
         </div>
 
         <span class="ms-4">
@@ -159,12 +110,6 @@ export default{
 
 <style scoped lang="scss">
 @use '../../styles/partials/variables' as *;
-    // button {
-    //     color: $my_bg-lightgrey;
-    //     background-color: transparent;
-    //     border: none;
-    //     font-size: 1.3rem;
-    // }
 
     span{
         margin: 0 .5rem;

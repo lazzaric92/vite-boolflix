@@ -1,5 +1,5 @@
 <script>
-import { store } from "../../store.js";
+import { store } from "../../store";
 import CardsListFilter from "./CardsListFilter.vue";
 import CardsListSingleCard from "./CardsListSingleCard.vue";
 import CardsListPagesButtons from "./CardsListPagesButtons.vue";
@@ -9,7 +9,7 @@ import AppLoader from "./AppLoader.vue";
 export default{
     data(){
         return {
-            store
+            store,
         }
     },
     components: {
