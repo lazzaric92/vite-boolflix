@@ -55,6 +55,38 @@ export default{
         },
         setCurrentPage(page){
             this.store.currentPage = page;
+            this.updateSearchResults();
+        },
+        clickHandle(e){
+            // console.log(e.currentTarget);
+
+            if(e.currentTarget.classList.contains('first')){
+                this.store.currentPage = 1;
+                this.updateSearchResults();
+            }
+            else if(e.currentTarget.classList.contains('prev')){
+                console.info('PREV');
+            }
+            else if(e.currentTarget.classList.contains('next')){
+                console.info('NEXT');
+            }
+            else if(e.currentTarget.classList.contains('last')){
+                switch (this.store.radioValue) {
+                    case 'movies':
+                        this.store.currentPage = this.store.moviesListPages;
+                        break;
+                    case 'tv':
+                        this.store.currentPage = this.store.tvSeriesListPages;
+                        break;
+                    default:
+                        this.store.currentPage = this.store.totalPages;
+                        break;
+                }
+                this.updateSearchResults();
+            }
+            else if(e.currentTarget.classList.contains('dots') || e.currentTarget.classList.contains('active-page')){
+                return;
+            }
         }
     },
 }
@@ -62,23 +94,23 @@ export default{
 
 <template>
     <div class="d-flex justify-content-center align-items-center mt-3 pb-3">
-        <span >
+        <span class="first" @click="clickHandle">
             <font-awesome-icon icon="fa-solid fa-angles-left" />
         </span>
-        <span class="me-4">
+        <span class="me-4 prev" @click="clickHandle">
             <font-awesome-icon icon="fa-solid fa-angle-left" />
         </span>
 
-        <span v-if="this.store.currentPage > 4">...</span>
+        <span v-if="this.store.currentPage > 4" class="dots">...</span>
 
         <!-- # movies -->
         <div v-if="this.store.radioValue === 'movies'">
             <template v-for="page in this.store.moviesListPages">
                 <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage" @click="setCurrentPage(page)">{{ page }}</span>
-                <span v-if="page === this.store.currentPage" class="active-page" >{{ page }}</span>
+                <span v-if="page === this.store.currentPage" class="active-page" @click="clickHandle">{{ page }}</span>
                 <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)" @click="setCurrentPage(page)">{{ page }}</span>
             </template>
-            <span v-if="this.store.currentPage < (this.store.moviesListPages - 4)">...</span>
+            <span v-if="this.store.currentPage < (this.store.moviesListPages - 4)" class="dots">...</span>
         </div>
         <!-- # tv series -->
         <div v-else-if="this.store.radioValue === 'tv'">
@@ -87,22 +119,22 @@ export default{
                 <span v-if="page === this.store.currentPage" class="active-page" >{{ page }}</span>
                 <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)" @click="setCurrentPage(page)">{{ page }}</span>
             </template>
-            <span v-if="this.store.currentPage < (this.store.tvSeriesListPages - 4)">...</span>
+            <span v-if="this.store.currentPage < (this.store.tvSeriesListPages - 4)" class="dots">...</span>
         </div>
         <!-- # all -->
         <div v-else>
             <template v-for="page in this.store.totalPages">
                 <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage" @click="setCurrentPage(page)">{{ page }}</span>
-                <span v-if="page === this.store.currentPage" class="active-page" >{{ page }}</span>
+                <span v-if="page === this.store.currentPage" class="active-page" @click="clickHandle">{{ page }}</span>
                 <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)" @click="setCurrentPage(page)">{{ page }}</span>
             </template>
-            <span v-if="this.store.currentPage < (this.store.totalPage - 4)">...</span>
+            <span v-if="this.store.currentPage < (this.store.totalPages - 4)" class="dots">...</span>
         </div>
 
-        <span class="ms-4">
+        <span class="ms-4 next">
             <font-awesome-icon icon="fa-solid fa-angle-right" />
         </span>
-        <span >
+        <span class="last" @click="clickHandle">
             <font-awesome-icon icon="fa-solid fa-angles-right" />
         </span>
     </div>
@@ -113,14 +145,19 @@ export default{
 
     span{
         margin: 0 .5rem;
-        cursor: pointer;
         color: $my_bg-lightgrey;
         font-size: 1.1rem;
+        cursor: default;
         
-        &:hover{
-            color: white;
-            scale: 1.1;
+        &:not(.dots){
+            cursor: pointer;
+
+            &:hover{
+                color: white;
+                scale: 1.1;
+            }
         }
+
 
         &.active-page{
             color: $my_logo-color;
