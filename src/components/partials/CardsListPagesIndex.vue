@@ -48,9 +48,13 @@ export default{
         },
         updateSearchResults: function(){
             if(this.store.searchedString !== ""){
+                this.store.searchLoading = true;
                 this.store.resultsList = [];
                 this.updateMoviesList();
                 this.updateTVSeriesList();
+                setTimeout(() => {
+                    this.store.searchLoading = false;
+                }, 1000)
             }
         },
         setCurrentPage(page){

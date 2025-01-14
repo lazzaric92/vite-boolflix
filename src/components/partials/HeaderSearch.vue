@@ -35,7 +35,11 @@ export default{
                 this.$route.push({name: 'not-found'});
             })
             .finally(() => {
-                this.store.searchLoading = false;
+                if(this.store.searchLoading === true){
+                    setTimeout(() => {
+                        this.store.searchLoading = false;
+                    }, 1000);
+                }
             });            
         },
         getTVSeriesList: function(){
@@ -80,6 +84,7 @@ export default{
         getSearchResults: function(){
             if(this.store.searchedString !== ""){
                 this.store.resultsList = [];
+                this.store.searchLoading = true
                 this.currentPage = 1;
                 // this.store.totalPages = 0;
                 this.getMoviesList();

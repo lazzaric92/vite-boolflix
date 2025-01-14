@@ -20,57 +20,57 @@ export default{
         AppLoader
     },
     methods: {
-        updateMoviesList(){
-            axios.get('https://api.themoviedb.org/3/search/movie', {
-                params: {
-                api_key: "861729733fec3d9d72d05bb5c85381e2",
-                query: this.store.searchedString,
-                language: "it-IT",
-                page: this.store.currentPage
-                }
-            })
-            .then((response) => {
-                this.store.moviesList = response.data.results;
-                // console.log(this.store.moviesList);
-                this.store.resultsList = [...this.store.resultsList, ...this.store.moviesList];
-            })
-            .catch((error) => {
-                console.log(error);
-                this.$router.push({name: 'not-found'});
-            })
-            .finally(() => {
-                //
-            });            
-        },
-        updateTVSeriesList(){
-            axios.get('https://api.themoviedb.org/3/search/tv', {
-                params: {
-                api_key: "861729733fec3d9d72d05bb5c85381e2",
-                query: this.store.searchedString,
-                language: "it-IT",
-                page: this.store.currentPage
-                }
-            })
-            .then((response) => {
-                this.store.tvSeriesList = response.data.results;
-                console.log(this.store.tvSeriesList);
-                this.store.resultsList = [...this.store.resultsList, ...this.store.tvSeriesList];
-            })
-            .catch((error) => {
-                console.log(error);
-                this.$router.push({name: 'not-found'});
-            })
-            .finally(() => {
-                //
-            }); 
-        },
-        updateSearchResults(){
-            if(this.store.searchedString !== ""){
-                this.store.resultsList = [];
-                this.updateMoviesList();
-                this.updateTVSeriesList();
-            }
-        },
+        // updateMoviesList(){
+        //     axios.get('https://api.themoviedb.org/3/search/movie', {
+        //         params: {
+        //         api_key: "861729733fec3d9d72d05bb5c85381e2",
+        //         query: this.store.searchedString,
+        //         language: "it-IT",
+        //         page: this.store.currentPage
+        //         }
+        //     })
+        //     .then((response) => {
+        //         this.store.moviesList = response.data.results;
+        //         // console.log(this.store.moviesList);
+        //         this.store.resultsList = [...this.store.resultsList, ...this.store.moviesList];
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //         this.$router.push({name: 'not-found'});
+        //     })
+        //     .finally(() => {
+        //         //
+        //     });            
+        // },
+        // updateTVSeriesList(){
+        //     axios.get('https://api.themoviedb.org/3/search/tv', {
+        //         params: {
+        //         api_key: "861729733fec3d9d72d05bb5c85381e2",
+        //         query: this.store.searchedString,
+        //         language: "it-IT",
+        //         page: this.store.currentPage
+        //         }
+        //     })
+        //     .then((response) => {
+        //         this.store.tvSeriesList = response.data.results;
+        //         console.log(this.store.tvSeriesList);
+        //         this.store.resultsList = [...this.store.resultsList, ...this.store.tvSeriesList];
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //         this.$router.push({name: 'not-found'});
+        //     })
+        //     .finally(() => {
+        //         //
+        //     }); 
+        // },
+        // updateSearchResults(){
+        //     if(this.store.searchedString !== ""){
+        //         this.store.resultsList = [];
+        //         this.updateMoviesList();
+        //         this.updateTVSeriesList();
+        //     }
+        // },
     },
 }
 </script>
