@@ -1,6 +1,6 @@
 <script>
 import { store } from '../../store';
-
+import axios from 'axios';
 
 export default{
     data(){
@@ -28,7 +28,67 @@ export default{
     methods: {
         changeRadioValue: function(value){
             this.store.radioValue = value;
-        }
+            this.updateMoviesList();
+            this.updateTvSeriesList();
+        },
+        updateMoviesList(){
+            let page;
+            if(this.store.currentPage < this.store.moviesListPages){
+                page = this.store.currentPage;
+            } else {
+                page = this.store.moviesListPages;
+            };
+
+            axios.get('https://api.themoviedb.org/3/search/movie', {
+                params: {
+                api_key: "861729733fec3d9d72d05bb5c85381e2",
+                query: this.store.searchedString,
+                language: "it-IT",
+                page: page
+                }
+            })
+            .then((response) => {
+                this.store.moviesList = response.data.results;
+                // console.log(this.store.moviesList);
+                this.store.resultsList = [...this.store.resultsList, ...this.store.moviesList];
+            })
+            .catch((error) => {
+                console.log(error);
+                this.$router.push({name: 'not-found'});
+            })
+            .finally(() => {
+                //
+            });            
+        },
+        updateTvSeriesList(){
+            let page;
+            if(this.store.currentPage < this.store.tvSeriesListPages){
+                page = this.store.currentPage;
+            } else {
+                page = this.store.tvSeriesListPages;
+            };
+
+            axios.get('https://api.themoviedb.org/3/search/tv', {
+                params: {
+                api_key: "861729733fec3d9d72d05bb5c85381e2",
+                query: this.store.searchedString,
+                language: "it-IT",
+                page: page
+                }
+            })
+            .then((response) => {
+                this.store.tvSeriesList = response.data.results;
+                console.log(this.store.tvSeriesList);
+                this.store.resultsList = [...this.store.resultsList, ...this.store.tvSeriesList];
+            })
+            .catch((error) => {
+                console.log(error);
+                this.$router.push({name: 'not-found'});
+            })
+            .finally(() => {
+                //
+            }); 
+        },
     },
 }
 </script>

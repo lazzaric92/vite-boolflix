@@ -114,15 +114,19 @@ export default{
                 <span v-if="page === this.store.currentPage" class="active-page" @click="clickHandle">{{ page }}</span>
                 <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)" @click="setCurrentPage(page)">{{ page }}</span>
             </template>
+            <span v-if="this.store.currentPage > this.store.moviesListPages + 3" @click="setCurrentPage(this.store.moviesListPages)" class="active-page">{{ this.store.moviesListPages }}</span>
+
             <span v-if="this.store.currentPage < (this.store.moviesListPages - 4)" class="dots">...</span>
         </div>
         <!-- # tv series -->
         <div v-else-if="this.store.radioValue === 'tv'">
             <template v-for="page in this.store.tvSeriesListPages">
-                <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage" @click="setCurrentPage(page)">{{ page }}</span>
+                <span v-if="page > (this.store.currentPage - 4) && page < this.store.currentPage" @click="setCurrentPage(page)" :class="(this.store.currentPage > this.store.tvSeriesListPages && page === this.store.tvSeriesListPages) ? 'active-page' : ''">{{ page }}</span>
                 <span v-if="page === this.store.currentPage" class="active-page" >{{ page }}</span>
                 <span v-if="page > this.store.currentPage && page < (this.store.currentPage + 4)" @click="setCurrentPage(page)">{{ page }}</span>
             </template>
+            <span v-if="this.store.currentPage > this.store.tvSeriesListPages + 3" @click="setCurrentPage(this.store.tvSeriesListPages)" class="active-page">{{ this.store.tvSeriesListPages }}</span>
+
             <span v-if="this.store.currentPage < (this.store.tvSeriesListPages - 4)" class="dots">...</span>
         </div>
         <!-- # all -->
