@@ -21,7 +21,7 @@ export default{
             })
             .then((response) => {
                 this.store.moviesList = response.data.results;
-                console.log(this.store.moviesList);
+                // console.log(this.store.moviesList);
                 this.store.resultsList = [...this.store.resultsList, ...this.store.moviesList];
             })
             .catch(function (error) {
@@ -39,7 +39,7 @@ export default{
             })
             .then((response) => {
                 this.store.tvSeriesList = response.data.results;
-                console.log(this.store.tvSeriesList);
+                // console.log(this.store.tvSeriesList);
                 this.store.resultsList = [...this.store.resultsList, ...this.store.tvSeriesList];
             })
             .catch(function (error) {
@@ -62,7 +62,7 @@ export default{
             this.updateSearchResults();
         },
         clickHandle(e){
-            console.log(e.currentTarget);
+            // console.log(e.currentTarget);
             let totPages;
             switch (this.store.radioValue) {
                     case 'movies':

@@ -28,6 +28,9 @@ export default{
     methods: {
         changeRadioValue: function(value){
             this.store.radioValue = value;
+            this.store.moviesList = [];
+            this.store.tvSeriesList = [];
+            this.store.resultsList = [];
             this.updateMoviesList();
             this.updateTvSeriesList();
         },
@@ -78,7 +81,7 @@ export default{
             })
             .then((response) => {
                 this.store.tvSeriesList = response.data.results;
-                console.log(this.store.tvSeriesList);
+                // console.log(this.store.tvSeriesList);
                 this.store.resultsList = [...this.store.resultsList, ...this.store.tvSeriesList];
             })
             .catch((error) => {
