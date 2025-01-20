@@ -62,17 +62,39 @@ export default{
             this.updateSearchResults();
         },
         clickHandle(e){
-            // console.log(e.currentTarget);
+            console.log(e.currentTarget);
+            let totPages;
+            switch (this.store.radioValue) {
+                    case 'movies':
+                        totPages = this.store.moviesListPages;
+                        break;
+                    case 'tv':
+                        totPages = this.store.tvSeriesListPages;
+                        break;
+                    default:
+                        totPages = this.store.totalPages;
+                        break;
+                }
 
             if(e.currentTarget.classList.contains('first')){
                 this.store.currentPage = 1;
                 this.updateSearchResults();
             }
             else if(e.currentTarget.classList.contains('prev')){
-                console.info('PREV');
+                if(this.store.currentPage > 0){
+                    if(this.store.currentPage > totPages){
+                        this.store.currentPage = totPages - 1;
+                    } else {
+                        this.store.currentPage--;
+                    }
+                    this.updateSearchResults();
+                }
             }
             else if(e.currentTarget.classList.contains('next')){
-                console.info('NEXT');
+                if(this.store.currentPage < totPages){
+                    this.store.currentPage++;
+                    this.updateSearchResults();
+                }
             }
             else if(e.currentTarget.classList.contains('last')){
                 switch (this.store.radioValue) {
@@ -139,7 +161,7 @@ export default{
             <span v-if="this.store.currentPage < (this.store.totalPages - 4)" class="dots">...</span>
         </div>
 
-        <span class="ms-4 next">
+        <span class="ms-4 next" @click="clickHandle">
             <font-awesome-icon icon="fa-solid fa-angle-right" />
         </span>
         <span class="last" @click="clickHandle">
